@@ -36,36 +36,58 @@ class Battle {
     bool useSkills();    // アクティブスキル発動フェイズ → パッシブスキル発動フェイズ
     bool usePassiveSkills();   // パッシブスキル発動フェイズ
 
+    // 睡眠か混乱なら true を返す
     bool isSleepOrCofusion( Status s );
+    // 状態異常（通常状態以外）なら true を返す
     bool isAilment( Status s );
+    // p の位置にいるヒーローが毒ダメージを受ける
     void poisonDamage( Position p );
+    // p の位置にいるヒーローが混乱によるランダム攻撃をする
     void confusionRandomAttack( Position p );
+    // p の位置にいるヒーローが死んでいたら true を返す
     bool isDead( Position p );
     
+    // PHY/INT攻撃のダメージ計算
     int calcDamage( int attack, int rate, int attacked );
+    // 回復効果の計算
     int calcHeal( int inte, int phy, int rate );
+    // 回復効果の計算（サンタクロースのパッシブ用）
     int calcHeal( int inte, int phy, double rate );
+    // value の rate% 回復
     int calcHeal( int value, int rate );
+    // 状態異常になるかどうか、確率で決定
     bool determineStatusAilment( int int_attack, int int_attacked );
+    // 状態異常が回復するかどうか、確率で決定
     bool determineNormalization();
 
+    // アクティブスキルを使用
     void useActiveSkill( Position p );
+    // パッシブスキルを使用
     bool usePassiveSkill( Position p );
 
     public:
 
     Battle() {}
 
+    // p の位置にいるヒーローの ID、能力値、アクティブスキルのIDをセット
     void setHero( Position p, ID i,  int attr[], ACTIVE_SKILL_ID active_skill_index[] ) {
         heroes[p.side][p.order].set( i, p.side, p.order, attr, active_skill_index );
     }
 
-
-    void startBattle();    
+    
+    // 戦闘開始して、200アクション経過するかどちらかのチームが全滅するまでループ
+    void startBattle();
+    // s の側のチームが全滅しているかどうか
     bool isEndGameByDead( Side s );
     
-    bool fileOpen(); // ファイルを正しく開けたら true を返す
+    // ログ出力用ファイルを開く
+    // ファイルを正しく開けたら true を返す
+    bool fileOpen(); 
+    // ログ出力用ファイルを閉じる
     void fileClose();
+
+    // ログ出力するときは true になる
+    // ログ出力ファイルを開くのに成功したら true 閉じたときに false に戻す
     bool print_battle_log = true;
     
     
@@ -197,7 +219,7 @@ class Battle {
     void resetAllDamaged();
 
 
-
+    // アクション数を返す
     int getNumberOfAction();
 
 
@@ -823,27 +845,6 @@ class Battle {
     bool Johann_Sebastian_Bach( Position p );
     // チンギス・ハン
     bool Genghis_Khan( Position p );
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 };
 

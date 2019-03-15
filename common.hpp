@@ -17,10 +17,6 @@
 using namespace std;
 
 typedef int ID;
-// typedef int HP;
-// typedef int PHY;
-// typedef int INT;
-// typedef int AGI;
 
 typedef int ACTIVE_SKILL_ID;
 typedef int ACTION_VALUE;
@@ -177,6 +173,9 @@ enum Target {
     Random
 };
 
+
+/* ---------------------- スキル関数に渡す引数に使う ---------------------- */
+
 const bool BUFF = true;
 const bool DEBUFF = false;
 
@@ -188,6 +187,11 @@ const bool LOW = false;
 
 const bool ALLY = true;
 const bool ENEMY = false;
+
+
+
+
+
 
 
 typedef struct Position {
@@ -247,7 +251,6 @@ int convertIDToHeroIndex( ID id );
 
 
 string convertIDToHeroName( ID id );
-ID convertHeroNameToID( string s );
 
 
 ACTIVE_SKILL_ID convertExtensionNameToID( string s );
