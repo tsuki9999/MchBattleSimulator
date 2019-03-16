@@ -25,7 +25,11 @@ int main() {
     for ( Order o = Front; o < Order_End; o++ ) {
 
         string line;
-        if ( !getline( ifs, line ) ) { cout << "error" << endl; return 0; };
+        if ( !getline( ifs, line ) ) {
+            cout << "heroes.txt error" << endl; 
+            system("pause");
+            return 0;
+        }
 
         istringstream iss( line );
 
@@ -38,21 +42,41 @@ int main() {
         getline( iss, s, '\t' );
         id = stoi( s );
 
-        if ( convertIDToHeroIndex(id) == 0 ) { cout << "hero ID error" << endl; return 0; }
+        if ( convertIDToHeroIndex(id) == 0 ) {
+            cout << "hero ID error" << endl; 
+            system("pause");
+            return 0;
+        }
 
         for ( int i = 0; i < 3; i++ ) {
-            if ( ! getline( iss, s, '\t' ) ) { cout << "error" << endl; return 0; };
+            if ( ! getline( iss, s, '\t' ) ) {
+                cout << "heroes.txt error" << endl; 
+                system("pause");
+                return 0;
+            }
             asi[i] = stoi( s );
             if ( !isValidActiveSkillID( asi[i] ) ) { cout << "active skill ID error" << endl; return 0; }
         }
 
-        if ( !getline( ifs, line ) ) { cout << "error" << endl; return 0; };
+        if ( !getline( ifs, line ) ) {
+            cout << "heroes.txt error" << endl; 
+            system("pause");
+            return 0;
+        }
         istringstream iss2( line );
 
         for ( Attr a = HP; a <= AGI; a++ ) {
-            if ( ! getline( iss2, s, '\t' ) ) { cout << "error" << endl; return 0; };
+            if ( ! getline( iss2, s, '\t' ) ) {
+                cout << "heroes.txt error" << endl; 
+                system("pause");
+                return 0;
+            }
             attr[a] = stoi( s );
-            if ( attr[a] < 0 || attr[a] > 999 ) { cout << "status error" << endl; return 0; }
+            if ( attr[a] < 0 || attr[a] > 999 ) {
+                cout << "hero status error" << endl; 
+                system("pause");
+                return 0;
+            }
         }
 
 
@@ -81,11 +105,15 @@ int main() {
 
         battle.resetBattle();
 
-        if ( i == 10 ) { battle.fileClose(); }
+        if ( i == 9 ) { battle.fileClose(); }
     }
     
-    cout << win << " " << lose << endl;
-    
+    if ( n_battle < 10 ) { battle.fileClose(); }
+
+    cout << "win: " << win << " " << "lose: " << lose << endl;
+
+
+    system("pause");
 
     return 0;
 }
@@ -293,7 +321,7 @@ Fの死亡時に状態異常の扱いがどうなっているのかは要検証
 
 // etheremon zedakazm スキルは敵１体ごとにかかる状態異常が違うのか？
 
-// カフカ　AGIバフは自分自身？味方全体？　味方全体で実装
+// カフカ　AGIバフは自分自身？味方全体？　自分自身で実装
 // 松尾芭蕉　先頭の味方へのAGIバフは、自己バフで上がったAGIの値を元に計算するのか？それともバフされる前の値が元なのか？　バフされる前で実装
 // ヴァレンティヌス　先頭の味方を回復→最もHPの低い味方回復　or　先頭の味方と最もHPの低い味方を同時に回復　後者で実装
 // 劉備　日本語が意味不明　「最もHPが低い味方のHPを20%の回復効果を与える」　20%の回復効果　なのか　HP20%分回復　のどちらなのか不明　前者で実装

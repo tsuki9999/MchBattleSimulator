@@ -11,5 +11,7 @@
 *.pdb
 *.idb
 *.tlog
+.vscode/
+.vs/
 Debug/
 Release/
