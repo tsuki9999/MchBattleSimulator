@@ -11,3 +11,8 @@
 *.pdb
 *.idb
 *.tlog
+/Debug
+/Release
+/img
+/.vscode
+*.json
