@@ -11,3 +11,5 @@
 *.pdb
 *.idb
 *.tlog
+Debug/
+Release/
