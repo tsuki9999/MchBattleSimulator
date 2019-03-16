@@ -13,6 +13,5 @@
 *.tlog
 /Debug
 /Release
-/img
 /.vscode
 *.json
