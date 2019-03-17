@@ -1329,7 +1329,8 @@ void Battle::repA_monkey( Position p ) {
     statusAilmentSkill( p, HP, LOW, ENEMY, Sleep );
 }
 void Battle::repS_monkey( Position p ) {
-    // 調査中
+    damageSkill( p, HP, LOW, ENEMY, 15, 20, INT, ACTIVE_DAMAGE );
+    statusAilmentSkill( p, HP, LOW, ENEMY, Sleep );
 }
 // original
 void Battle::novice_monkey( Position p ) {
@@ -1364,7 +1365,8 @@ void Battle::repA_snake( Position p ) {
     healSkill( p, HP, LOW, ALLY, 12, 32 );
 }
 void Battle::repS_snake( Position p ) {
-    // 調査中
+    changeAttrSkill( p, HP, LOW, ALLY, PHY, INT, 9, 19, BUFF );
+    healSkill( p, HP, LOW, ALLY, 14, 34 );
 }
 // original
 void Battle::novice_snake( Position p ) {
