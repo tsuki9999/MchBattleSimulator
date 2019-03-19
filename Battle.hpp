@@ -886,18 +886,21 @@ class Battle {
     void code_injection_1_5( Position p );
 
 
-
-
-
-
-
-
-
-
-
-
     /* ---------------------- Enemy Passive Skill ---------------------- */
 
+    // スパムボム2.0
+    bool spam_bomb_2_0( Position p );
+    // ロールバックボム2.0
+    bool rollback_bomb_2_0( Position p );
+    // フィッシングボム2.0
+    bool phishing_bomb_2_0( Position p );
+    // スミッシング1.0
+    bool smishing_1_0( Position p );
+    // スミッシング2.0
+    bool smishing_2_0( Position p );
+    // コードインジェクション2.0
+    bool code_injection_2_0( Position p );
+    
 
 
 
