@@ -481,13 +481,14 @@ void  Battle::giveDebuff( Position p, Attr a, int debuff ) {
 }
 
 
-// p の位置にいるヒーローの HP 以外の能力値とステータスを初期値に戻す（行動値はそのまま）
+// p の位置にいるヒーローの HP 以外の能力値とステータスを初期値に戻す（行動値は０にする）
 void Battle::resetOtherThanHP( Position p ) {
     Hero* hero = &heroes[p.side][p.order];
 
     for ( Attr a = PHY; a < ATTR_END; a++ ) {
         hero->attr_battle[a] = hero->getInitAttr(a);
     }
+    hero->action_value = 0;
 
     hero->status = Normal;
 }

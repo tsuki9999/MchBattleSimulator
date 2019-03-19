@@ -846,6 +846,61 @@ class Battle {
     // チンギス・ハン
     bool Genghis_Khan( Position p );
 
+
+    /* ---------------------- Enemy Active Skill ---------------------- */
+
+    // スパミング1.0
+    void spamming_1_0( Position p );
+    // スパミング1.2
+    void spamming_1_2( Position p );
+    // スパミング2.0
+    void spamming_2_0( Position p );
+
+    // リファクタリング1.0
+    void refactoring_1_0( Position p );
+    // リファクタリングボム2.0
+    void refactoring_bomb_2_0( Position p );
+
+    // フィッシング1.0
+    void phishing_1_0( Position p );    
+    // フィッシング1.2
+    void phishing_1_2( Position p );
+    // フィッシング2.0
+    void phishing_2_0( Position p );
+
+    // ディープラーニング1.0
+    void deep_learning_1_0( Position p );
+    // ディープラーニング1.5
+    void deep_learning_1_5( Position p );
+    // ディープラーニングボム2.0
+    void deep_learning_bomb_2_0( Position p );
+
+    // ロールバック1.0
+    void rollback_1_0( Position p );
+    // ロールバック1.5
+    void rollback_1_0( Position p );
+
+    // コードインジェクション1.0
+    void code_injection_1_0( Position p );
+    // コードインジェクション1.5
+    void code_injection_1_5( Position p );
+
+
+
+
+
+
+
+
+
+
+
+
+    /* ---------------------- Enemy Passive Skill ---------------------- */
+
+
+
+
 };
 
 
