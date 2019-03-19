@@ -11,6 +11,8 @@ Googleスプレッドシート（https://docs.google.com/spreadsheets/d/1ISTTGVU
 
 動作確認は Windows 10 64bit で行いました。
 
+不具合などのご連絡は、twitter ID @luteola9999　もしくは　luteola9999@gmail.com までよろしくお願いします。
+
 Special Thanks to
 マイクリプトヒーローズ My Crypto Heroes https://www.mycryptoheroes.net/ja
 My Crypto Heroes 攻略Wiki https://bcgamewiki.com/mch/start
