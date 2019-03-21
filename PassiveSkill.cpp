@@ -363,7 +363,7 @@ bool Battle::Franz_Kafka( Position p ) {
 	bool is_use = usePassiveInBattleStart( p, 100 );
 	if ( is_use ) {
         healSkill( p, AllAlly, 30 );
-        changeAttrSkill( p, OneSelf, AGI, AGI, 5, BUFF );
+        changeAttrSkill( p, AllAlly, AGI, AGI, 5, BUFF );
     }
      return is_use;
 }
