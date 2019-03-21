@@ -591,8 +591,8 @@ bool Battle::Diao_Chan( Position p ) {
 bool Battle::Saint_Valentine( Position p ) {
 	bool is_use = usePassiveInActiveByChance( p, 100 );
 	if ( is_use ) {
-        healSkill( p, HP, LOW, ALLY, 10 );
         healSkill( p, FrontAlly, 10 );
+        healSkill( p, HP, LOW, ALLY, 10 );
         damageSkill( p, OneSelf, 10, INT, NOT_ACTIVE_DAMAGE );
     }
      return is_use;
