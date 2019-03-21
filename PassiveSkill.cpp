@@ -19,6 +19,8 @@ bool (Battle::*functionPointerTablePassive[])( Position p ) = {
     &Battle::Blaise_Pascal,
     // ダビデ
     &Battle::David,
+    // 雷電為右衛門
+    &Battle::Raniden_Tameemon,
         
     // Uncommon
     // ライト兄弟
@@ -49,6 +51,8 @@ bool (Battle::*functionPointerTablePassive[])( Position p ) = {
     &Battle::Xu_Chu,
     // 徳川慶喜
     &Battle::Tokugawa_Yoshinobu,
+    // モンテスキュー
+    &Battle::Montesquieu,
 
     // Rare
     // イーサエモン・レッド
@@ -97,6 +101,8 @@ bool (Battle::*functionPointerTablePassive[])( Position p ) = {
     &Battle::Pocahontas,    
     // 孫堅
     &Battle::Sun_Jian,
+    // ルーベンス
+    &Battle::Peter_Paul_Rubens,
 
     //Epic
     // 張飛
@@ -151,6 +157,8 @@ bool (Battle::*functionPointerTablePassive[])( Position p ) = {
     &Battle::Takeda_Shinge,
     // カエサル
     &Battle::Gaius_Iulius_Caesar,
+    // 土方歳三
+    &Battle::Hijikata_Toshizo,
 
     // Legendary
     // 織田信長
@@ -179,6 +187,13 @@ bool (Battle::*functionPointerTablePassive[])( Position p ) = {
     &Battle::Johann_Sebastian_Bach,
     // チンギス・ハン
     &Battle::Genghis_Khan,
+    // カール大帝
+    &Battle::Charles_the_Great,
+    // 諸葛亮
+    &Battle::Zhuge_Liang,
+    // クレオパトラ
+    &Battle::Cleopatra,
+
 
 };
 
@@ -250,6 +265,14 @@ bool Battle::David( Position p ) {
     bool is_use = usePassiveInActiveByChance( p, 25 );
     if ( is_use ) {
         damageSkill( p, FrontEnemy, 30, PHY, NOT_ACTIVE_DAMAGE );
+    }
+    return is_use;
+}
+// 雷電為右衛門
+bool Battle::Raniden_Tameemon( Position p ) {
+    bool is_use = usePassiveInBattleStart( p, 100 );
+    if ( is_use ) {
+        changeAttrSkill( p, OneSelf, PHY, PHY, 30, BUFF );
     }
     return is_use;
 }
@@ -378,6 +401,17 @@ bool Battle::Tokugawa_Yoshinobu( Position p ) {
         vector<Attr> va = { PHY, INT };
         changeAttrSkill( p, AllAlly, va, INT, 15, DEBUFF );
         changeAttrSkill( p, OneSelf, INT, INT, 40, DEBUFF );
+    }
+    return is_use;
+}
+// モンテスキュー
+bool Battle::Montesquieu( Position p ) {
+    bool is_use = usePassiveInBattleStart( p, 100 );
+    if ( is_use ) {
+        changeAttrSkill( p, INT, HIGH, ENEMY, INT, INT, 30, DEBUFF );
+        Position p_lowest = searchLowestAttrHero( oppositeSide(p.side), INT );
+        if ( !isValidPosition( p_lowest ) ) { return true; }
+        changeAttrSkill( p_lowest, OneSelf, INT, INT, 30, BUFF );
     }
     return is_use;
 }
@@ -582,7 +616,18 @@ bool Battle::Sun_Jian( Position p ) {
     }
     return is_use;
 }
-
+// ルーベンス
+bool Battle::Peter_Paul_Rubens( Position p ) {
+    bool is_use = usePassiveInActiveByChance( p, 25 );
+	if ( is_use ) {
+        for ( Order o = Front; o < Order_End; o++ ) {
+            Position p_temp = { p.side, o };
+            if ( !isDead( p_temp ) ) { changeAttrSkill( p_temp, OneSelf, AGI, AGI, 10, DEBUFF ); }
+        }
+        changeAttrSkill( p, OneSelf, AGI, AGI, 20, BUFF );
+    }
+    return is_use;
+}
 
 //Epic
 // 張飛
@@ -812,6 +857,15 @@ bool Battle::Gaius_Iulius_Caesar( Position p ) {
     }
     return is_use;
 }
+// 土方歳三
+bool Battle::Hijikata_Toshizo( Position p ) {
+    bool is_use = usePassiveInActiveByChance( p, 40 );
+	if ( is_use ) {
+        changeAttrSkill( p, FrontEnemy, AGI, PHY, 10, DEBUFF );
+        changeAttrSkill( p, HP, LOW, ALLY, PHY, PHY, 10, BUFF );
+    }
+    return is_use;
+}
 
 // Legendary
 // 織田信長
@@ -924,7 +978,45 @@ bool Battle::Genghis_Khan( Position p ) {
 	if ( is_use ) {
         damageSkill( p, FrontEnemy, 40, PHY, NOT_ACTIVE_DAMAGE );
     }
-
-     return is_use;
+    return is_use;
+}
+// カール大帝
+bool Battle::Charles_the_Great( Position p ) {
+    bool is_use = usePassiveInActiveByChance( p, 25 );
+	if ( is_use ) {
+        changeAttrSkill( p, OneSelf, INT, INT, 30, BUFF );
+        Position p_highest = searchHighestAttrHero( oppositeSide(p.side), INT );
+        if ( !isValidPosition(p_highest) ) { return true; }
+        changeAttrSkill( p_highest, OneSelf, INT, INT, 30, DEBUFF );
+    }
+    return is_use;
+}
+// 諸葛亮
+bool Battle::Zhuge_Liang( Position p ) {
+    bool is_use = usePassiveDying( p, 100 );
+	if ( is_use ) {
+        for ( Order o = Front; o < Order_End; o++ ) {
+            Attr a[3] = { PHY, INT, AGI };
+            Position p_temp = { oppositeSide(p.side), o };
+            if ( !isDead( p_temp ) ) {
+                for ( int i = 0; i < 3; i++ ) {
+                    Hero* hero = &heroes[p_temp.side][p_temp.order];
+                    int value = hero->attr_battle[a[i]] - hero->getInitAttr(a[i]);
+                    if ( value <= 0 ) { continue; }
+                    changeAttrSkill( p_temp, OneSelf, a[i], value, 100, DEBUFF );
+                }
+            }
+        }
+    }
+    return is_use;
+}
+// クレオパトラ
+bool Battle::Cleopatra( Position p ) {
+    bool is_use = usePassiveDamaged( p, 100 );
+	if ( is_use ) {
+        int value = heroes[p.side][p.order].damaged;
+        changeAttrSkill( p, FrontEnemy, AGI, value, 25, DEBUFF );
+    }
+    return is_use;
 }
 

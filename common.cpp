@@ -5,12 +5,9 @@ Side oppositeSide( Side s ) {
 }
 
 
-
-
-
-
-
-
+bool isValidPosition( Position p ) {
+    return p.side != Side_End && p.order != Order_End;
+}
 
 
 
@@ -49,6 +46,7 @@ string hero_name_array[ n_novice + n_uncommon + n_rare + n_epic + n_legendary + 
     "孫尚香",
     "パスカル",
     "ダビデ",
+    "雷電為右衛門",
     // Uncommon  2xxxx
     "ライト兄弟",
     "スパルタクス",
@@ -64,6 +62,7 @@ string hero_name_array[ n_novice + n_uncommon + n_rare + n_epic + n_legendary + 
     "石田三成",
     "許チョ",
     "徳川慶喜",
+    "モンテスキュー",
     // Rare      3xxxx
     "イーサエモン・レッド",
     "ダルタニャン",
@@ -88,6 +87,7 @@ string hero_name_array[ n_novice + n_uncommon + n_rare + n_epic + n_legendary + 
     "ヴァレンティヌス",
     "ポカホンタス",
     "孫堅",
+    "ルーベンス",
     // Epic    4xxxx
     "張飛",
     "ナイチンゲール",
@@ -115,6 +115,7 @@ string hero_name_array[ n_novice + n_uncommon + n_rare + n_epic + n_legendary + 
     "岳飛",
     "武田信玄",
     "カエサル",
+    "土方歳三",
     // Legendary 5xxxx,
     "織田信長",
     "ナポレオン・ボナパルト",
@@ -128,7 +129,11 @@ string hero_name_array[ n_novice + n_uncommon + n_rare + n_epic + n_legendary + 
     "アインシュタイン",
     "卑弥呼",
     "バッハ",
-    "チンギス・ハン"
+    "チンギス・ハン",
+    "カール大帝",
+    "諸葛亮",
+    "クレオパトラ",
+
 };
 
 

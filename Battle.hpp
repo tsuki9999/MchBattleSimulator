@@ -685,6 +685,8 @@ class Battle {
     bool Blaise_Pascal( Position p );
     // ダビデ
     bool David( Position p );
+    // 雷電為右衛門
+    bool Raniden_Tameemon( Position p );
     
     // Uncommon
     // ライト兄弟
@@ -715,6 +717,8 @@ class Battle {
     bool Xu_Chu( Position p );
     // 徳川慶喜
     bool Tokugawa_Yoshinobu( Position p );
+    // モンテスキュー
+    bool Montesquieu( Position p );
 
     // Rare
     // イーサエモン・レッド
@@ -763,6 +767,8 @@ class Battle {
     bool Pocahontas( Position p );
     // 孫堅
     bool Sun_Jian( Position p );
+    // ルーベンス
+    bool Peter_Paul_Rubens( Position p );
 
     //Epic
     // 張飛
@@ -817,6 +823,8 @@ class Battle {
     bool Takeda_Shinge( Position p );
     // カエサル
     bool Gaius_Iulius_Caesar( Position p );
+    // 土方歳三
+    bool Hijikata_Toshizo( Position p );
 
     // Legendary
     // 織田信長
@@ -845,6 +853,12 @@ class Battle {
     bool Johann_Sebastian_Bach( Position p );
     // チンギス・ハン
     bool Genghis_Khan( Position p );
+    // カール大帝
+    bool Charles_the_Great( Position p );
+    // 諸葛亮
+    bool Zhuge_Liang( Position p );
+    // クレオパトラ
+    bool Cleopatra( Position p );
 
 
     /* ---------------------- Enemy Active Skill ---------------------- */

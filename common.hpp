@@ -117,11 +117,11 @@ enum ActiveSkillType {
 
 // それぞれのレアリティのヒーロー数
 /* !!!!!!!!!!!!!!!!!!!!!!!!!!!!ヒーローが追加されたら変更すること!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
-const int n_novice = 7;
-const int n_uncommon = 14;
-const int n_rare = 23;
-const int n_epic = 26;
-const int n_legendary = 13;
+const int n_novice = 8;
+const int n_uncommon = 15;
+const int n_rare = 24;
+const int n_epic = 27;
+const int n_legendary = 16;
 
 // この index に ID の下４ケタを足した値が、Passive Skill 関数の index
 const int novice_index = 0;
@@ -273,6 +273,7 @@ void initExtensionNameToID();
 
 
 Side oppositeSide( Side s );
+bool isValidPosition( Position p );
 
 
 int Dice( int a, int b );
