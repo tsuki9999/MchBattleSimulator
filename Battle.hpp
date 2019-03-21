@@ -892,7 +892,7 @@ class Battle {
     // ロールバック1.0
     void rollback_1_0( Position p );
     // ロールバック1.5
-    void rollback_1_0( Position p );
+    void rollback_1_5( Position p );
 
     // コードインジェクション1.0
     void code_injection_1_0( Position p );

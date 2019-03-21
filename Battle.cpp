@@ -153,9 +153,6 @@ bool Battle::useSkills() {
         
         // 終了条件の優先順位は要検証 todo
         // とりあえず、200アクションに達したらパッシブスキル発動フェイズに入らずに終了することにしておく
-        for ( Side s = Attack; s <= Defence; s++ ) {
-            if ( isEndGameByDead( s ) ) { return true; }
-        }
 
         if ( n_action >= 200 ) { return true; } // 200アクションで終了
 
@@ -452,32 +449,61 @@ void Battle::giveDamage( Position p, int damage, bool is_active ) {
 
     if ( is_active ) { hero->damaged += damage; } // アクティブスキルによって受けたダメージ量に加算
 
-    hero->attr_battle[HP] -= damage;
+    int delta = min( damage, hero->attr_battle[HP] );
+
+    hero->attr_battle[HP] -= delta;
 
     // 死亡時に HP 以外の能力値とステータスを初期値に戻す（行動値はそのまま）
-    if ( hero->attr_battle[HP] <= 0 ) {
+    if ( hero->attr_battle[HP] == 0 ) {
         resetOtherThanHP( p );
-        hero->attr_battle[HP] = 0; // HP は０にする
     }
+
+    printPositionHero( p );
+    printChangeAttributeValue( HP, delta, false );
+
 }
 // p の位置にいるヒーローの HP を heal 分回復する
 void Battle::giveHeal( Position p, int heal ) {
     Hero* hero = &heroes[p.side][p.order];
 
-    hero->attr_battle[HP] += heal;
-    hero->attr_battle[HP] = min( hero->attr_battle[HP], hero->getInitAttr(HP) );
+    int delta = min( heal, hero->getInitAttr(HP) - hero->attr_battle[HP] );
+
+    if ( delta > 0 ) {
+        printPositionHero( p );
+        printChangeAttributeValue( HP, delta, true );
+    }
+    
+    hero->attr_battle[HP] += delta;
+
 }
 
 
 // p の位置にいるヒーローの 能力値（HP以外） を buff 分増やす
 void  Battle::giveBuff( Position p, Attr a, int buff ) {
-    heroes[p.side][p.order].attr_battle[a] += buff;
-    heroes[p.side][p.order].attr_battle[a] = min( 999, heroes[p.side][p.order].attr_battle[a] );
+    Hero* hero = &heroes[p.side][p.order];
+
+    int delta = min( buff, 999 - hero->attr_battle[a] );
+    
+    if ( delta > 0 ) {
+        printPositionHero( p );
+        printChangeAttributeValue( a, delta, true );
+    }
+
+    hero->attr_battle[a] += delta;
 }
+
 // p の位置にいるヒーローの 能力値（HP以外） を debuff 分減らす
 void  Battle::giveDebuff( Position p, Attr a, int debuff ) {
-    heroes[p.side][p.order].attr_battle[a] -= debuff;
-    heroes[p.side][p.order].attr_battle[a] = max( 1, heroes[p.side][p.order].attr_battle[a] );
+    Hero* hero = &heroes[p.side][p.order];
+
+    int delta = min( debuff, hero->attr_battle[a]-1 );
+    
+    if ( delta > 0 ) {
+        printPositionHero( p );
+        printChangeAttributeValue( a, delta, false );
+    }
+
+    hero->attr_battle[a] -= delta;
 }
 
 
@@ -496,6 +522,10 @@ void Battle::resetOtherThanHP( Position p ) {
 
 // p の位置にいるヒーローを（混乱・睡眠・毒）にする
 void Battle::giveStatusAilment( Position p, Status s ) {
+
+    printPositionHero( p );
+    printStatusAilment( s );
+
     heroes[p.side][p.order].status = s;
 }
 
@@ -518,9 +548,6 @@ void Battle::damageSkill( Position p, Target t, int rate, Attr a_damage, bool is
 
     vector<Position> target = searchTarget( p, t );
     if ( target[0].side == Side_End && target[0].order == Order_End ) { return; }
-
-    Side s_temp = Side_End;
-
     
     // スキル効果対象ヒーローに対して、rate% の PHY/INT ダメージを与える
     for ( Position& p_attacked : target ) {
@@ -530,15 +557,6 @@ void Battle::damageSkill( Position p, Target t, int rate, Attr a_damage, bool is
         int damage = calcDamage( hero_attack->attr_battle[a_damage], rate, hero_attacked->attr_battle[a_damage] );
         giveDamage( p_attacked, damage, is_active );
 
-        // ログに出力
-        if ( s_temp != p_attacked.side ) {
-            printSide( p_attacked.side );
-        }
-        s_temp = p_attacked.side;
-
-        printOrder( p_attacked.order );
-        printHeroName( p_attacked );
-        printChangeAttributeValue( HP, damage, false );
     }
 }
 
@@ -552,13 +570,8 @@ void Battle::damageSkill( Position p, Target t, int rateA, int rateB, Attr a_dam
     vector<Position> target = searchTarget( p, t );
     if ( target[0].side == Side_End && target[0].order == Order_End ) { return; }
 
-    Side s_temp = Side_End;
-
-
     // スキル効果対象ヒーローに対して、rate% の PHY/INT ダメージを与える
     for ( Position& p_attacked : target ) {
-
-
 
         Hero* hero_attacked = &heroes[p_attacked.side][p_attacked.order];
 
@@ -567,15 +580,6 @@ void Battle::damageSkill( Position p, Target t, int rateA, int rateB, Attr a_dam
         int damage = calcDamage( hero_attack->attr_battle[a_damage], rate, hero_attacked->attr_battle[a_damage] );
         giveDamage( p_attacked, damage, is_active );
 
-        // ログに出力
-        if ( s_temp != p_attacked.side ) {
-            printSide( p_attacked.side );
-        }
-        s_temp = p_attacked.side;
-
-        printOrder( p_attacked.order );
-        printHeroName( p_attacked );
-        printChangeAttributeValue( HP, damage, false );
     }
 }
 
@@ -598,9 +602,6 @@ void Battle::damageSkill( Position p, Attr a_target, bool is_high, bool is_ally,
     int damage = calcDamage( hero_attack->attr_battle[a_damage], rate, hero_attacked->attr_battle[a_damage] );
     giveDamage( p_attacked, damage, is_active );
 
-    // ログに出力
-    printPositionHero( p_attacked );
-    printChangeAttributeValue( HP, damage, false );
 }
 
 // p の位置にいるヒーローが、ある能力値が最も（高い・低い）（敵・味方） に rateA ~ rateB% の PHY/INT ダメージを与える
@@ -623,9 +624,6 @@ void Battle::damageSkill( Position p, Attr a_target, bool is_high, bool is_ally,
     int damage = calcDamage( hero_attack->attr_battle[a_damage], rate, hero_attacked->attr_battle[a_damage] );
     giveDamage( p_attacked, damage, is_active );
 
-    // ログに出力
-    printPositionHero( p_attacked );
-    printChangeAttributeValue( HP, damage, false );
 }
 
 /* ---------------------- バフ、デバフ ---------------------- */
@@ -640,19 +638,9 @@ void Battle::changeAttrSkill( Position p, Target t, Attr a_change, Attr a_ref, i
     // a_ref の値の rate%
     int delta = ( heroes[p.side][p.order].attr_battle[a_ref] * rate ) / 100;    
 
-    Side s_temp = Side_End;
     // スキル効果対象ヒーローに対して、rate% の （バフ・デバフ）を a_change に与える
     for ( Position& p_target : target ) {
         
-        // ログに出力
-        if ( s_temp != p_target.side ) {
-            printSide( p_target.side );
-        }
-        s_temp = p_target.side;
-
-        printOrder( p_target.order );
-        printHeroName( p_target );
-        printChangeAttributeValue( a_change, delta, is_buff );
         // 能力値変化
         is_buff ? giveBuff( p_target, a_change, delta ) : giveDebuff( p_target, a_change, delta );
     }
@@ -667,21 +655,10 @@ void Battle::changeAttrSkill( Position p, Target t, vector<Attr> a_change, Attr 
     // a_ref の値の rate%
     int delta = ( heroes[p.side][p.order].attr_battle[a_ref] * rate ) / 100;
 
-    Side s_temp = Side_End;
     // スキル効果対象ヒーローに対して、rate% の （バフ・デバフ）を a_change に与える
     for ( Position& p_target : target ) {
         
-        // ログに出力
-        if ( s_temp != p_target.side ) {
-            printSide( p_target.side );
-        }
-        s_temp = p_target.side;
-
-        printOrder( p_target.order );
-        printHeroName( p_target );
-
         for ( Attr& a_target: a_change ) {
-            printChangeAttributeValue( a_target, delta, is_buff );
             // 能力値変化
             is_buff ? giveBuff( p_target, a_target, delta ) : giveDebuff( p_target, a_target, delta );
         }
@@ -697,22 +674,11 @@ void Battle::changeAttrSkill( Position p, Target t, Attr a_change, Attr a_ref, i
     // a_ref の値
     int delta = heroes[p.side][p.order].attr_battle[a_ref];
 
-    Side s_temp = Side_End;
     // スキル効果対象ヒーローに対して、rate% の （バフ・デバフ）を a_change に与える
     for ( Position& p_target : target ) {
 
         int rate = Dice( rateA, rateB );
         delta = delta * rate / 100;
-
-        // ログに出力
-        if ( s_temp != p_target.side ) {
-            printSide( p_target.side );
-        }
-        s_temp = p_target.side;
-
-        printOrder( p_target.order );
-        printHeroName( p_target );
-        printChangeAttributeValue( a_change, delta, is_buff );
 
         // 能力値変化
         is_buff ? giveBuff( p_target, a_change, delta ) : giveDebuff( p_target, a_change, delta );
@@ -727,25 +693,14 @@ void Battle::changeAttrSkill( Position p, Target t, vector<Attr> a_change, Attr 
     // a_ref の値
     int delta = heroes[p.side][p.order].attr_battle[a_ref];
 
-    Side s_temp = Side_End;
     // スキル効果対象ヒーローに対して、rate% の （バフ・デバフ）を a_change に与える
     for ( Position& p_target : target ) {
         
-        // ログに出力
-        if ( s_temp != p_target.side ) {
-            printSide( p_target.side );
-        }
-        s_temp = p_target.side;
-
-        printOrder( p_target.order );
-        printHeroName( p_target );
-
         for ( Attr& ac: a_change ) {
 
             int rate = Dice( rateA, rateB );
             delta = delta * rate / 100;
 
-            printChangeAttributeValue( ac, delta, is_buff );
             // 能力値変化
             is_buff ? giveBuff( p_target, ac, delta ) : giveDebuff( p_target, ac, delta );
         }
@@ -763,8 +718,6 @@ void Battle::changeAttrSkill( Position p, Attr a_target, bool is_high, bool is_a
 
     int delta = heroes[p.side][p.order].attr_battle[a_ref] * rate / 100;
 
-    printPositionHero( p_target );
-    printChangeAttributeValue( a_change, delta, is_buff );
     is_buff ? giveBuff( p_target, a_change, delta ) : giveDebuff( p_target, a_change, delta );
 
 }
@@ -778,9 +731,7 @@ void Battle::changeAttrSkill( Position p, Attr a_target, bool is_high, bool is_a
 
     int delta = heroes[p.side][p.order].attr_battle[a_ref] * rate / 100;
 
-    printPositionHero( p_target );
     for ( Attr ac : a_change ) {        
-        printChangeAttributeValue( ac, delta, is_buff );
         is_buff ? giveBuff( p_target, ac, delta ) : giveDebuff( p_target, ac, delta );
     }    
 
@@ -797,8 +748,6 @@ void Battle::changeAttrSkill( Position p, Attr a_target, bool is_high, bool is_a
     int rate = Dice( rateA, rateB );
     int delta = heroes[p.side][p.order].attr_battle[a_ref] * rate / 100;
 
-    printPositionHero( p_target );
-    printChangeAttributeValue( a_change, delta, is_buff );
     is_buff ? giveBuff( p_target, a_change, delta ) : giveDebuff( p_target, a_change, delta );
 
 }
@@ -812,13 +761,11 @@ void Battle::changeAttrSkill( Position p, Attr a_target, bool is_high, bool is_a
 
     int delta = heroes[p.side][p.order].attr_battle[a_ref];
 
-    printPositionHero( p_target );
     for ( Attr ac : a_change ) {
 
         int rate = Dice( rateA, rateB );
         delta = delta * rate / 100;
 
-        printChangeAttributeValue( ac, delta, is_buff );
         is_buff ? giveBuff( p_target, ac, delta ) : giveDebuff( p_target, ac, delta );
     }    
 }
@@ -832,19 +779,8 @@ void Battle::changeAttrSkill( Position p, Target t, Attr a_change, int value, in
     // value の値の rate%
     int delta = value * rate / 100;
 
-    Side s_temp = Side_End;
     // スキル効果対象ヒーローに対して、rate% の （バフ・デバフ）を a_change に与える
     for ( Position& p_target : target ) {
-        
-        // ログに出力
-        if ( s_temp != p_target.side ) {
-            printSide( p_target.side );
-        }
-        s_temp = p_target.side;
-
-        printOrder( p_target.order );
-        printHeroName( p_target );
-        printChangeAttributeValue( a_change, delta, is_buff );
         // 能力値変化
         is_buff ? giveBuff( p_target, a_change, delta ) : giveDebuff( p_target, a_change, delta );
     }
@@ -859,24 +795,12 @@ void Battle::changeAttrSkill( Position p, Target t, vector<Attr> a_change, int v
     // value の値の rate%
     int delta = value * rate / 100;
 
-    Side s_temp = Side_End;
     // スキル効果対象ヒーローに対して、rate% の （バフ・デバフ）を a_change に与える
-    for ( Position& p_target : target ) {
-        
-        // ログに出力
-        if ( s_temp != p_target.side ) {
-            printSide( p_target.side );
-        }
-        s_temp = p_target.side;
-
-        printOrder( p_target.order );
-        printHeroName( p_target );
-
-        for ( Attr& a_target: a_change ) {
-            printChangeAttributeValue( a_target, delta, is_buff );
-            // 能力値変化
-            is_buff ? giveBuff( p_target, a_target, delta ) : giveDebuff( p_target, a_target, delta );
-        }
+    for ( Position& p_target : target ) {        
+    for ( Attr& a_target: a_change ) {
+        // 能力値変化
+        is_buff ? giveBuff( p_target, a_target, delta ) : giveDebuff( p_target, a_target, delta );
+    }
     }
 
 }
@@ -889,29 +813,15 @@ void Battle::changeAttrSkill( Position p, Target t, vector<Attr> a_change, int v
     int rate = Dice( rateA, rateB );
     int delta = value * rate / 100;
 
-    Side s_temp = Side_End;
     // スキル効果対象ヒーローに対して、rate% の （バフ・デバフ）を a_change に与える
-    for ( Position& p_target : target ) {
-        
-        // ログに出力
-        if ( s_temp != p_target.side ) {
-            printSide( p_target.side );
-        }
-        s_temp = p_target.side;
-
-        printOrder( p_target.order );
-        printHeroName( p_target );
-
-        for ( Attr& a_target: a_change ) {
-            printChangeAttributeValue( a_target, delta, is_buff );
-            // 能力値変化
-            is_buff ? giveBuff( p_target, a_target, delta ) : giveDebuff( p_target, a_target, delta );
-        }
+    for ( Position& p_target : target ) {        
+    for ( Attr& a_target: a_change ) {
+        // 能力値変化
+        is_buff ? giveBuff( p_target, a_target, delta ) : giveDebuff( p_target, a_target, delta );
+    }
     }
 
 }
-
-
 
 
 
@@ -924,20 +834,9 @@ void Battle::healSkill( Position p, Target t, int rate ) {
     vector<Position> target = searchTarget( p, t );
     if ( target[0].side == Side_End && target[0].order == Order_End ) { return; }
 
-    Side s_temp = Side_End;
     for ( Position& p_target : target ) {
         int heal = calcHeal( heroes[p.side][p.order].attr_battle[INT], heroes[p_target.side][p_target.order].attr_battle[PHY], rate );
-        giveHeal( p_target, heal );
-
-        if ( s_temp != p_target.side ) {
-            printSide( p_target.side );
-        }
-        s_temp = p_target.side;
-
-        // ログに出力
-        printOrder( p_target.order );
-        printHeroName( p_target );
-        printChangeAttributeValue( HP, heal, true );
+        giveHeal( p_target, heal );        
     }
 }
 
@@ -947,20 +846,9 @@ void Battle::healSkill( Position p, Target t, double rate ) {
     vector<Position> target = searchTarget( p, t );
     if ( target[0].side == Side_End && target[0].order == Order_End ) { return; }
 
-    Side s_temp = Side_End;
     for ( Position& p_target : target ) {
         int heal = calcHeal( heroes[p.side][p.order].attr_battle[INT], heroes[p_target.side][p_target.order].attr_battle[PHY], rate );
         giveHeal( p_target, heal );
-
-        if ( s_temp != p_target.side ) {
-            printSide( p_target.side );
-        }
-        s_temp = p_target.side;
-
-        // ログに出力
-        printOrder( p_target.order );
-        printHeroName( p_target );
-        printChangeAttributeValue( HP, heal, true );
     }
 }
 
@@ -971,23 +859,11 @@ void Battle::healSkill( Position p, Target t, int rateA, int rateB ) {
     vector<Position> target = searchTarget( p, t );
     if ( target[0].side == Side_End && target[0].order == Order_End ) { return; }
 
-    Side s_temp = Side_End;
     for ( Position& p_target : target ) {
-
         int rate = Dice( rateA, rateB );
 
         int heal = calcHeal( heroes[p.side][p.order].attr_battle[INT], heroes[p_target.side][p_target.order].attr_battle[PHY], rate );
         giveHeal( p_target, heal );
-
-        if ( s_temp != p_target.side ) {
-            printSide( p_target.side );
-        }
-        s_temp = p_target.side;
-
-        // ログに出力
-        printOrder( p_target.order );
-        printHeroName( p_target );
-        printChangeAttributeValue( HP, heal, true );
     }
 
 }
@@ -998,20 +874,9 @@ void Battle::healSkillException( Position p, Target t, int value, int rate ) {
     vector<Position> target = searchTarget( p, t );
     if ( target[0].side == Side_End && target[0].order == Order_End ) { return; }
 
-    Side s_temp = Side_End;
     for ( Position& p_target : target ) {
         int heal = calcHeal( value, rate );
         giveHeal( p_target, heal );
-
-        if ( s_temp != p_target.side ) {
-            printSide( p_target.side );
-        }
-        s_temp = p_target.side;
-
-        // ログに出力
-        printOrder( p_target.order );
-        printHeroName( p_target );
-        printChangeAttributeValue( HP, heal, true );
     }
 }
 
@@ -1028,10 +893,6 @@ void Battle::healSkill( Position p, Attr a_target, bool is_high, bool is_ally, i
     int heal = calcHeal( heroes[p.side][p.order].attr_battle[INT], heroes[p_target.side][p_target.order].attr_battle[PHY], rate );
     giveHeal( p_target, heal );
 
-    // ログに出力
-    printPositionHero( p_target );
-    printChangeAttributeValue( HP, heal, true );
-
 }
 // p の位置にいるヒーローが、ある能力値が最も（高い・低い）（敵・味方） に rateA ~ rateB% の 回復効果を与える
 void Battle::healSkill( Position p, Attr a_target, bool is_high, bool is_ally, int rateA, int rateB ) {
@@ -1047,10 +908,6 @@ void Battle::healSkill( Position p, Attr a_target, bool is_high, bool is_ally, i
 
     int heal = calcHeal( heroes[p.side][p.order].attr_battle[INT], heroes[p_target.side][p_target.order].attr_battle[PHY], rate );
     giveHeal( p_target, heal );
-
-    // ログに出力
-    printPositionHero( p_target );
-    printChangeAttributeValue( HP, heal, true );
 }
 
 
@@ -1062,7 +919,6 @@ void Battle::statusAilmentSkill( Position p, Target t, Status s ) {
     vector<Position> target = searchTarget( p, t );
     if ( target[0].side == Side_End && target[0].order == Order_End ) { return; }
 
-    Side s_temp = Side_End;
     for ( Position& p_target : target ) {
         Hero* hero_target = &heroes[p_target.side][p_target.order];
 
@@ -1071,16 +927,6 @@ void Battle::statusAilmentSkill( Position p, Target t, Status s ) {
 
         if ( determineStatusAilment( heroes[p.side][p.order].attr_battle[INT], hero_target->attr_battle[INT] ) ) {
             giveStatusAilment( p_target, s );
-
-            // ログに出力
-            if ( s_temp != p_target.side ) {
-                printSide( p_target.side );
-            }
-            s_temp = p_target.side;
-
-            printOrder( p_target.order );
-            printHeroName( p_target );
-            printStatusAilment( s );
         }
     }
 
@@ -1101,14 +947,8 @@ void Battle::statusAilmentSkill( Position p, Attr a_target, bool is_high, bool i
 
     if ( determineStatusAilment( heroes[p.side][p.order].attr_battle[INT], hero_target->attr_battle[INT] ) ) {
             giveStatusAilment( p_target, s );
-
-            printPositionHero( p_target );
-            printStatusAilment( s );
     }
 }
-
-
-
 
 
 /* ---------------------- Passive Skill の発動条件 ---------------------- */
@@ -1480,7 +1320,7 @@ void Battle::printAllHeroInfo() {
     ofs_battle_log << endl << endl;;
 
     for ( Side s = Attack; s <= Defence; s++ ) {
-        ofs_battle_log << uniformStringLength( sideToName(s), 12 ) << " ";
+        ofs_battle_log << sideToName(s) << " ";
         for ( Order o = Front; o <= Back; o++ ) {
             Hero* hero = &heroes[s][o];
 

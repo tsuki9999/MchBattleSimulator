@@ -53,7 +53,7 @@ void Battle::rollback_1_0( Position p ) {
     healSkill( p, HP, LOW, ALLY, 10, 30 );
 }
 // ロールバック1.5
-void Battle::rollback_1_0( Position p ) {
+void Battle::rollback_1_5( Position p ) {
     healSkill( p, HP, LOW, ALLY, 25, 45 );
 }
 

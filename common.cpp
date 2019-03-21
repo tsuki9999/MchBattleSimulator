@@ -644,8 +644,8 @@ bool isValidActiveSkillID( ACTIVE_SKILL_ID id ) {
 
 
 
-string orderName[3] = { "前衛", "中衛", "後衛" };
-string sideName[2] = { "Attack側", "Defence側" };
+string orderName[3] = { "前", "中", "後" };
+string sideName[2] = { "A", "D" };
 
 string statusName[4] = { "", "混乱", "睡眠", "毒" };
 string attributeName[4] = { "HP", "PHY", "INT", "AGI" };
