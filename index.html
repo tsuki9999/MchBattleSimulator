@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <base href="{{site.github.url}}" charset="utf-8">
     <title>MchBattleSimulator</title>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="css/index.css">
+    <!-- <link rel="stylesheet" href="css/index.css"> -->
+    <link rel="stylesheet" href="https://github.com/tsuki9999/MchBattleSimulator/css/index.css">
 </head>
 <body>
 
@@ -28,7 +28,7 @@
                         <p><a href="#download">ダウンロードして展開</a></p>
                     </li>
                     <li>
-                        <p><a href="#spreadsheet">スプレッドシート上で編成、IDと能力値をheroes.txtに貼り付け</a></p>
+                        <p><a href="#spreadsheet">シミュレートするチームを編成、IDと能力値をheroes.txtに貼り付け</a></p>
                     </li>
                     <li>
                         <p><a href="#simulator">シミュレータの起動、バトルの実行、結果の確認</a></p>
@@ -60,76 +60,25 @@
                     ダウンロードできたらZIPファイルを展開し、適当な場所に保存してください。
                 </p>
 
-            <h3 id="spreadsheet">スプレッドシート上で編成、IDと能力値をheroes.txtに貼り付け</h3>
+            <h3 id="spreadsheet">シミュレートするチームを編成、IDと能力値をheroes.txtに貼り付け</h3>
 
                 <p>
-                    <a href="https://docs.google.com/spreadsheets/d/1ISTTGVUYv-ZZH2bnV84pdSNAq61ZH436KLaBeUh4lb4/edit?usp=sharing" target="_blank">MCH(Google スプレッドシート）</a>にアクセスし、<br>
-                    ファイル → コピーを作成 でスプレッドシートをコピーしてください。
-                </p>
-                <p>
-                    コピー出来たら、「入力フォーム」というシート上でヒーローの編成を行ってください。
-                </p>
-                <img src="img/spreadsheet_hero.png">
-                <p>青い枠線で囲まれていて▼がついているセルをクリックすると選択肢が現れます。</p>
-                <p style="color:red">注: ヒーローが使用するスキルは、スキル１～３の順番になります</p>
-                <p style="color:red">注: 使わないスキルがあったり、同じものを複数選んでも警告が出ません</p>
-                
-                <p>
-                    ２チーム分のヒーローとスキルを選んだら、最後に能力値を決定します。<br>
-                    「入力フォーム」シートの下部に、このような欄があります。
-                </p>
-                
-                <img src="img/spreadsheet_id.png">
+                    <a href="https://tsuki9999.github.io/MchBattleSimulator/heroes.html" target="_blank">チーム編成専用ページ</a>で編成を行うと、
+                    ページ最下部にIDと能力値を示す数値が表示されます。<br>
 
-                <p>
-                    ヒーローとスキルのIDは、編成したら自動的に変わるようになっていますが、<br>
-                    能力値のセルは空欄になっているはずです。
-                </p>
-                <p>
-                    ここから、編成したヒーローとエクステンションの合計能力値を、<br>
-                    そのままこの欄に自動でコピーするスクリプトを実行する方法について説明します。<br>
-                    （最初に一度だけやれば、次からはボタンを押すだけでコピーされます）
-                </p>
-                <p>
-                    「能力値を赤枠の中にコピー」というボタンをクリックすると、<br>
-                    「スクリプトを実行しています」という表示が出ます。<br>
-                    しばらくすると、「承認が必要」と表示されるので、「続行」してください。<br>
-                    その後、googleにログインしていない場合はアカウントを選択すると、このような画面になります。<br>                    
-                </p>
-                <img src="img/alert.png">
-                <p>
-                    左下の「詳細」をクリックすると、下に広がってこのような画面になります。
-                </p>
-                <img src="img/alert2.png">
-                <p>
-                    ここで「コピーボタン（安全でないページに移動）」をクリックすると、
-                    このような画面が出てきます。
-                </p>
-                <img src="img/alert3.png">
-                <p>
-                    さらに下にスクロールすると「許可」というボタンがあるので、<br>
-                    それをクリックするとスクリプトが実行されます。
-                </p>
+                    数値をすべてコピーして、それをダウンロードして展開してできたフォルダの中にあるheroes.txtというファイルに貼り付けてください。<br><br>
 
-                <p>
-                    アートエディットによる能力を考慮する場合は、<br>
-                    最終的な能力をセルごとに打ち込んでください。                
+                    もしくは、<a href="https://tsuki9999.github.io/MchBattleSimulator/spreadsheet.html">スプレッドシート上で編成する方法</a>もあります。<br>
+                    使いやすい方で編成してください。
+                    
                 </p>
-
-                <p>                    
-                    赤い枠線の中のセルが全部埋まったら、<br>
-                    赤い枠線の中のセルをすべて選択した状態でCtrl+Cでコピーして、<br>
-                    ダウンロードして展開してできたフォルダの中にあるheroes.txtというファイルに貼り付けてください。<br>
-
-                </p>
-
 
             <h3 id="simulator">シミュレータの起動、バトルの実行、結果の確認</h3>
 
                 <p>
                     シミュレータを起動するには、ダウンロードして展開したフォルダの「MchBattleSimulator_(バージョン名).exe」を<br>
                     ダブルクリックしてください。<br>
-                    （コマンドプロンプトやpowershellを使い慣れている方はそちらからどうぞ）
+                    （コマンドプロンプトを使い慣れている方はそちらからどうぞ）
                 </p>
                 <p>
                     シミュレータが起動すると真っ黒な画面が開くので、<br>
@@ -142,12 +91,11 @@
                     何かキーを押すと終了します。<br>
                 </p>
                 <p>
-                    シミュレーションごとの記録は、シミュレータがあるフォルダに battle_log_x という名前で保存されます。<br>
+                    シミュレーションごとの記録は、シミュレータがあるフォルダに battle_log_(番号) という名前で保存されます。<br>
                     １回のシミュレーションにつき、最初の10戦だけ記録されます。
-
                 </p>
         
-            </section>
+        </section>
 
     <footer class="contents">
 
