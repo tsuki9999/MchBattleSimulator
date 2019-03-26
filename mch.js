@@ -11,6 +11,47 @@ const Rare = 3000;
 const Uncommon = 2000;
 const Novice = 1000;
 
+const RepS = 70000;
+const RepA = 60000;
+const RepB = 50000;
+const RepC = 40000;
+const RepD = 30000;
+const RepE = 20000;
+const RepF = 10000;
+
+const  Blade = 1;
+const  Musket = 2;
+const  Quill = 3;
+const  Armor = 4;
+const  Horse = 5;
+const  Katana = 6;
+const  Cutie = 7;
+const  Book = 8;
+const  Ring = 9;
+const  Shield = 10;
+const  Axe = 11;
+const  Etheremon = 12;
+const  Yumi = 13;
+const  CrossSpear = 14;
+const  Halberd = 15;
+const  Scrolls = 16;
+const  Necklace = 17;
+const  Kabuto = 18;
+const  Turtle = 19;
+const  Roostler = 20;
+const  Tiger = 21;
+const  Dragon = 22;
+const  Bull = 23;
+const  Elephant = 24;
+const  Monkey = 25;
+const  Snake = 26;
+const  Dog = 27;
+
+function isLandExtension( a ) {
+    return Turtle <= a && a <= Dog;
+}
+
+
 const ArtEditSkill = 100000;
 
 const SideToNum = {
@@ -46,8 +87,104 @@ const AttrAllZero = {
 };
 
 const HeroAttr = {
-    5001: { HP:459, PHY:185, INT:96, AGI:118 },
-    5002: { HP:384, PHY:105, INT:181, AGI:138 },
+    5001: { HP:459,PHY:185,INT:96,AGI:118 },
+    5002: { HP:384,PHY:105,INT:181,AGI:138 },
+    5003: { HP:504,PHY:145,INT:129,AGI:87 },
+    5004: { HP:420,PHY:120,INT:140,AGI:129 },
+    5005: { HP:381,PHY:96,INT:177,AGI:129 },
+    5006: { HP:444,PHY:132,INT:63,AGI:185 },
+    5007: { HP:672,PHY:108,INT:108,AGI:88 },
+    5008: { HP:405,PHY:104,INT:157,AGI:132 },
+    5009: { HP:381,PHY:124,INT:153,AGI:124 },
+    5010: { HP:453,PHY:67,INT:176,AGI:132 },
+    5011: { HP:396,PHY:120,INT:164,AGI:112 },
+    5012: { HP:360,PHY:92,INT:148,AGI:168 },
+    5013: { HP:348,PHY:148,INT:72,AGI:192 },
+    5014: { HP:300,PHY:132,INT:150,AGI:146 },
+    5015: { HP:462,PHY:79,INT:172,AGI:123 },
+    5016: { HP:534,PHY:58,INT:142,AGI:150 },
+
+    4001: { HP:516,PHY:133,INT:88,AGI:55 },
+    4002: { HP:345,PHY:88,INT:133,AGI:112 },
+    4003: { HP:324,PHY:95,INT:133,AGI:112 },
+    4004: { HP:324,PHY:133,INT:64,AGI:143 },
+    4005: { HP:387,PHY:112,INT:95,AGI:112 },
+    4006: { HP:354,PHY:78,INT:119,AGI:133 },
+    4007: { HP:459,PHY:88,INT:119,AGI:88 },
+    4008: { HP:387,PHY:112,INT:95,AGI:112 },
+    4009: { HP:354,PHY:157,INT:78,AGI:95 },
+    4010: { HP:468,PHY:150,INT:71,AGI:71 },
+    4011: { HP:375,PHY:78,INT:157,AGI:88 },
+    4012: { HP:303,PHY:102,INT:88,AGI:157 },
+    4013: { HP:375,PHY:78,INT:126,AGI:119 },
+    4014: { HP:480,PHY:88,INT:112,AGI:88 },
+    4015: { HP:267,PHY:86,INT:146,AGI:127 },
+    4016: { HP:495,PHY:142,INT:67,AGI:74 },
+    4017: { HP:267,PHY:87,INT:151,AGI:121 },
+    4018: { HP:412,PHY:102,INT:87,AGI:122 },
+    4019: { HP:291,PHY:131,INT:123,AGI:97 },
+    4020: { HP:381,PHY:74,INT:131,AGI:116 },
+    4021: { HP:336,PHY:67,INT:157,AGI:112 },
+    4022: { HP:264,PHY:172,INT:49,AGI:139 },
+    4023: { HP:243,PHY:154,INT:67,AGI:146 },
+    4024: { HP:288,PHY:131,INT:97,AGI:124 },
+    4025: { HP:402,PHY:116,INT:97,AGI:101 },
+    4026: { HP:363,PHY:131,INT:57,AGI:139 },
+    4027: { HP:399,PHY:135,INT:56,AGI:124 },
+
+    3001: { HP:372,PHY:108,INT:70,AGI:82 },
+    3002: { HP:153,PHY:96,INT:96,AGI:141 },
+    3003: { HP:303,PHY:82,INT:119,AGI:82 },
+    3004: { HP:225,PHY:59,INT:119,AGI:131 },
+    3005: { HP:372,PHY:45,INT:119,AGI:96 },
+    3006: { HP:288,PHY:96,INT:96,AGI:96 },
+    3007: { HP:372,PHY:82,INT:108,AGI:70 },
+    3008: { HP:372,PHY:45,INT:145,AGI:70 },
+    3009: { HP:330,PHY:70,INT:145,AGI:59 },
+    3010: { HP:303,PHY:82,INT:70,AGI:131 },
+    3011: { HP:288,PHY:109,INT:96,AGI:83 },
+    3012: { HP:288,PHY:83,INT:109,AGI:96 },
+    3013: { HP:321,PHY:105,INT:52,AGI:120 },
+    3014: { HP:276,PHY:113,INT:112,AGI:67 },
+    3015: { HP:509,PHY:56,INT:73,AGI:86 },
+    3016: { HP:213,PHY:86,INT:102,AGI:125 },
+    3017: { HP:327,PHY:70,INT:74,AGI:131 },
+    3018: { HP:399,PHY:128,INT:40,AGI:83 },
+    3019: { HP:144,PHY:118,INT:112,AGI:106 },
+    3020: { HP:132,PHY:77,INT:135,AGI:128 },
+    3021: { HP:285,PHY:55,INT:122,AGI:112 },
+    3022: { HP:246,PHY:55,INT:112,AGI:135 },
+    3023: { HP:249,PHY:128,INT:55,AGI:118 },
+    3024: { HP:198,PHY:55,INT:141,AGI:122 },
+
+    2001: { HP:219,PHY:47,INT:85,AGI:135 },
+    2002: { HP:573,PHY:59,INT:42,AGI:42 },
+    2003: { HP:234,PHY:108,INT:25,AGI:123 },
+    2004: { HP:294,PHY:47,INT:85,AGI:110 },
+    2005: { HP:330,PHY:35,INT:110,AGI:85 },
+    2006: { HP:174,PHY:75,INT:103,AGI:98 },
+    2007: { HP:255,PHY:42,INT:96,AGI:117 },
+    2008: { HP:318,PHY:31,INT:101,AGI:101 },
+    2009: { HP:168,PHY:79,INT:98,AGI:107 },
+    2010: { HP:234,PHY:46,INT:68,AGI:148 },
+    2011: { HP:186,PHY:57,INT:128,AGI:94 },
+    2012: { HP:246,PHY:79,INT:116,AGI:63 },
+    2013: { HP:285,PHY:131,INT:51,AGI:63 },
+    2014: { HP:216,PHY:57,INT:111,AGI:100 },
+    2015: { HP:186,PHY:51,INT:116,AGI:111 },
+
+    1001: { HP:162,PHY:63,INT:42,AGI:53 },
+    1002: { HP:162,PHY:42,INT:63,AGI:53 },
+    1003: { HP:159,PHY:53,INT:53,AGI:53 },
+    1004: { HP:93,PHY:65,INT:150,AGI:94 },
+    1005: { HP:264,PHY:97,INT:64,AGI:92 },
+    1006: { HP:186,PHY:38,INT:78,AGI:74 },
+    1007: { HP:318,PHY:74,INT:52,AGI:152 },
+    1008: { HP:264,PHY:70,INT:21,AGI:73 },
+
+
+
+
 };
 
 
@@ -640,6 +777,7 @@ $(document).ready( function(){
         $(this).change( function(){
 
             const val1 = ( parseInt( $(this).val() ) == ArtEditSkill ) ? "art_edit" : "extension";
+            const type = parseInt( $(this).val() );
 
             const children = $(this.nextElementSibling);
             
@@ -648,6 +786,40 @@ $(document).ready( function(){
                 if (val1 != val2) {
                     $(this).remove();
                 }
+                
+                const rarity = parseInt( $(this).val() );
+                // 未確認
+                // ホースのRepC以下
+                if ( type == Horse && RepF <= rarity && rarity <= RepC ) {
+                    $(this).remove();
+                }
+                // アックスのRepD以下
+                if ( type == Axe && RepF <= rarity && rarity <= RepD ) {
+                    $(this).remove();
+                }
+                // クロススピアのRepA以上
+                if ( type == CrossSpear && rarity >= RepA ) {
+                    $(this).remove();
+                }
+                // ドッグのRepS
+                if ( type == Dog && rarity >= RepA ) {
+                    $(this).remove();
+                }
+
+                // 存在しない
+                // キューティーのEpic、Legendary、レプリカ
+                if ( type == Cutie && ( rarity == Epic || rarity == Legendary || rarity >= RepF ) ) {
+                    $(this).remove();
+                }
+                // イーサエモンのレプリカ
+                if ( type == Etheremon && rarity >= RepF ) {
+                    $(this).remove();
+                }
+                // ランドエクステンションのRepF
+                if ( isLandExtension(type) && rarity == RepF ) {
+                    $(this).remove();
+                }
+
             });
 
             children.val("");
@@ -694,12 +866,6 @@ $(document).ready( function(){
                     $(this).val(attr[name]);
                 }); 
             });
-
-
-            // $(this.parentNode).find('input').each( function() {
-            //     const name = this.className;
-            //     $(this).val(attr[name]);
-            // });
 
             calcAttr( this );            
             printTextArea();
