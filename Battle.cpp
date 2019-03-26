@@ -238,7 +238,7 @@ void Battle::confusionRandomAttack( Position p ) {
     Hero* hero_attacked = &heroes[p_attacked.side][p_attacked.order];
 
     int damage = calcDamage( hero_attack->attr_battle[PHY], 100, hero_attacked->attr_battle[PHY] );
-    giveDamage( p_attacked, damage, false );
+    giveDamage( p_attacked, damage, ACTIVE_DAMAGE );
 
     if ( print_battle_log ) { ofs_battle_log << "混乱によるランダム攻撃 →   ";  }
 
