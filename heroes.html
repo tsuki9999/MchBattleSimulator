@@ -1,0 +1,384 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <title>チーム編成</title>
+    <script src="jquery-3.3.1.min.js"></script>
+    <script src="mch.js"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/heroes.css">
+
+</head>
+
+<body>
+
+
+
+    <div class="container p-5">
+        <div class="row">
+            <div class="col">
+                
+                <!-- ------------------------- Attack ------------------------- -->
+                <h1>Attack</h1>
+
+                <fieldset class="Attack Side">
+
+                        <!-- ------------------------- 前衛 ------------------------- -->                        
+                        <fieldset class="Front Order">
+                            <h2>Front</h2>
+
+                            <fieldset>
+                                <p class="text-center">
+                                    <select class="parent hero" size="1"></select>
+                                    <select class="children hero" disabled required></select>
+                                </p>
+                                <form class="attr_input mt-2 text-center"></form>
+                            </fieldset>
+                        
+                            <fieldset>
+                                <p class="text-center">
+                                    <select class="parent skill skill1" size="1"></select>
+                                    <select class="children skill skill1" disabled required></select>
+                                </p>
+                                <form class="attr_input mt-2 text-center"></form>
+                            </fieldset>
+                            <fieldset>
+                                <p class="text-center">
+                                    <select class="parent skill skill2" size="1"></select>
+                                    <select class="children skill skill2" disabled required></select>
+                                </p>
+                                <form class="attr_input mt-2 text-center"></form>
+                            </fieldset>
+                            <fieldset>        
+                                <p class="text-center">
+                                    <select class="parent skill skill3" size="1"></select>
+                                    <select class="children skill skill3" disabled required></select>
+                                </p>
+                                <form class="attr_input mt-2 text-center"></form>
+                            </fieldset>
+                        
+                            <p class="attr_sum text-white text-center font-weight-bold"></p>
+                        </fieldset>
+                    
+                        <!-- ------------------------- 中衛 ------------------------- -->
+                        <fieldset class="Middle Order">
+                            <h2>Middle</h2>
+
+                            <fieldset>
+                                <p class="text-center">
+                                    <select class="parent hero" size="1"></select>
+                                    <select class="children hero" disabled required></select>
+                                </p>
+                                <form class="attr_input mt-2 text-center"></form>
+                            </fieldset>
+                        
+                            <fieldset>
+                                <p class="text-center">
+                                    <select class="parent skill skill1" size="1"></select>
+                                    <select class="children skill skill1" disabled required></select>
+                                </p>
+                                <form class="attr_input mt-2 text-center"></form>
+                            </fieldset>
+                            <fieldset>
+                                <p class="text-center">
+                                    <select class="parent skill skill2" size="1"></select>
+                                    <select class="children skill skill2" disabled required></select>
+                                </p>
+                                <form class="attr_input mt-2 text-center"></form>
+                            </fieldset>
+                            <fieldset>        
+                                <p class="text-center">
+                                    <select class="parent skill skill3" size="1"></select>
+                                    <select class="children skill skill3" disabled required></select>
+                                </p>
+                                <form class="attr_input mt-2 text-center"></form>
+                            </fieldset>
+                        
+                            <p class="attr_sum text-white text-center font-weight-bold"></p>
+                        </fieldset>
+            
+                        
+                        <!-- ------------------------- 後衛 ------------------------- -->
+                        <fieldset class="Back Order">
+                            <h2>Back</h2>
+
+                            <fieldset>
+                                <p class="text-center">
+                                    <select class="parent hero" size="1"></select>
+                                    <select class="children hero" disabled required></select>
+                                </p>
+                                <form class="attr_input mt-2 text-center"></form>
+                            </fieldset>
+                        
+                            <fieldset>
+                                <p class="text-center">
+                                    <select class="parent skill skill1" size="1"></select>
+                                    <select class="children skill skill1" disabled required></select>
+                                </p>
+                                <form class="attr_input mt-2 text-center"></form>
+                            </fieldset>
+                            <fieldset>
+                                <p class="text-center">
+                                    <select class="parent skill skill2" size="1"></select>
+                                    <select class="children skill skill2" disabled required></select>
+                                </p>
+                                <form class="attr_input mt-2 text-center"></form>
+                            </fieldset>
+                            <fieldset>        
+                                <p class="text-center">
+                                    <select class="parent skill skill3" size="1"></select>
+                                    <select class="children skill skill3" disabled required></select>
+                                </p>
+                                <form class="attr_input mt-2 text-center"></form>
+                            </fieldset>
+                        
+                            <p class="attr_sum text-white text-center font-weight-bold"></p>
+                        </fieldset>
+            
+            </div>
+            <div class="col">
+                
+                <!-- ------------------------- Defence ------------------------- -->
+                <h1>Defence</h1>
+
+                <fieldset class="Defence Side">
+
+                    <!-- ------------------------- 前衛 ------------------------- -->                        
+                    <fieldset class="Front Order">
+                        <h2>Front</h2>
+
+                        <fieldset>
+                            <p class="text-center">
+                                <select class="parent hero" size="1"></select>
+                                <select class="children hero" disabled required></select>
+                            </p>
+                            <form class="attr_input mt-2 text-center"></form>
+                        </fieldset>
+                    
+                        <fieldset>
+                            <p class="text-center">
+                                <select class="parent skill skill1" size="1"></select>
+                                <select class="children skill skill1" disabled required></select>
+                            </p>
+                            <form class="attr_input mt-2 text-center"></form>
+                        </fieldset>
+                        <fieldset>
+                            <p class="text-center">
+                                <select class="parent skill skill2" size="1"></select>
+                                <select class="children skill skill2" disabled required></select>
+                            </p>
+                            <form class="attr_input mt-2 text-center"></form>
+                        </fieldset>
+                        <fieldset>        
+                            <p class="text-center">
+                                <select class="parent skill skill3" size="1"></select>
+                                <select class="children skill skill3" disabled required></select>
+                            </p>
+                            <form class="attr_input mt-2 text-center"></form>
+                        </fieldset>
+                    
+                        <p class="attr_sum text-white text-center font-weight-bold"></p>
+                    </fieldset>
+                    
+                        <!-- ------------------------- 中衛 ------------------------- -->
+                        <fieldset class="Middle Order">
+                            <h2>Middle</h2>
+
+                            <fieldset>
+                                <p class="text-center">
+                                    <select class="parent hero" size="1"></select>
+                                    <select class="children hero" disabled required></select>
+                                </p>
+                                <form class="attr_input mt-2 text-center"></form>
+                            </fieldset>
+                        
+                            <fieldset>
+                                <p class="text-center">
+                                    <select class="parent skill skill1" size="1"></select>
+                                    <select class="children skill skill1" disabled required></select>
+                                </p>
+                                <form class="attr_input mt-2 text-center"></form>
+                            </fieldset>
+                            <fieldset>
+                                <p class="text-center">
+                                    <select class="parent skill skill2" size="1"></select>
+                                    <select class="children skill skill2" disabled required></select>
+                                </p>
+                                <form class="attr_input mt-2 text-center"></form>
+                            </fieldset>
+                            <fieldset>        
+                                <p class="text-center">
+                                    <select class="parent skill skill3" size="1"></select>
+                                    <select class="children skill skill3" disabled required></select>
+                                </p>
+                                <form class="attr_input mt-2 text-center"></form>
+                            </fieldset>
+                        
+                            <p class="attr_sum text-white text-center font-weight-bold"></p>
+                        </fieldset>
+            
+                        
+                        <!-- ------------------------- 後衛 ------------------------- -->
+                        <fieldset class="Back Order">
+                            <h2>Back</h2>
+
+                            <fieldset>
+                                <p class="text-center">
+                                    <select class="parent hero" size="1"></select>
+                                    <select class="children hero" disabled required></select>
+                                </p>
+                                <form class="attr_input mt-2 text-center"></form>
+                            </fieldset>
+                        
+                            <fieldset>
+                                <p class="text-center">
+                                    <select class="parent skill skill1" size="1"></select>
+                                    <select class="children skill skill1" disabled required></select>
+                                </p>
+                                <form class="attr_input mt-2 text-center"></form>
+                            </fieldset>
+                            <fieldset>
+                                <p class="text-center">
+                                    <select class="parent skill skill2" size="1"></select>
+                                    <select class="children skill skill2" disabled required></select>
+                                </p>
+                                <form class="attr_input mt-2 text-center"></form>
+                            </fieldset>
+                            <fieldset>        
+                                <p class="text-center">
+                                    <select class="parent skill skill3" size="1"></select>
+                                    <select class="children skill skill3" disabled required></select>
+                                </p>
+                                <form class="attr_input mt-2 text-center"></form>
+                            </fieldset>
+                        
+                            <p class="attr_sum text-white text-center font-weight-bold"></p>
+                        </fieldset>
+            </div>
+        </div>
+    </div>
+
+    <div class="container px-5 pb-5">
+        <textarea class="text" rows="15" cols="50"></textarea>
+    </div>
+
+    
+
+
+    <form class="attr_value d-none">
+        <label>HP：<input class="HP" type="number" value="0" max="999" min="0"></label>
+        <label>PHY：<input class="PHY" type="number" value="0" max="999" min="0"></label>
+        <label>INT：<input class="INT" type="number" value="0" max="999" min="0"></label>
+        <label>AGI：<input class="AGI" type="number" value="0" max="999" min="0"></label>
+    </form>
+
+
+
+
+    <!-- ------------------------- 選択肢 ------------------------- -->
+
+    <select class="parent hero dummy"  style="display: none">
+        <option value="" class="msg" disabled selected>---ヒーローのレアリティ---</option>
+        <option value="Legendary">Legendary</option>
+        <option value="Epic">Epic</option>
+    </select>
+
+    <select class="children hero dummy" style="display: none">
+        <option value="" class="msg" disabled selected>-------ヒーロー名-------</option>
+        <option value="1" data-val="Legendary">織田信長</option>
+        <option value="2" data-val="Legendary">ナポレオン・ボナパルト</option>
+    </select>
+    
+
+    <select class="parent skill dummy" style="display: none">
+        <option value="" class="msg" disabled selected>------スキルの種類------</option>
+        <option value="100000">アートエディット</option>
+        <option value="1">ブレード</option>
+        <option value="2">マスケット</option>
+        <option value="3">ペン</option>
+        <option value="4">アーマー</option>
+        <option value="5">ホース</option>
+        <option value="6">カタナ</option>
+        <option value="7">キューティー</option>
+        <option value="8">ブック</option>
+        <option value="9">リング</option>
+        <option value="10">シールド</option>
+        <option value="11">アックス</option>
+        <option value="12">イーサエモン</option>
+        <option value="13">ユミ</option>
+        <option value="14">クロススピア</option>
+        <option value="15">ハルバード</option>
+        <option value="16">スクロール</option>
+        <option value="17">ネックレス</option>
+        <option value="18">カブト</option>
+        <option value="19">タートル</option>
+        <option value="20">ルースター</option>
+        <option value="21">タイガー</option>
+        <option value="22">ドラゴン</option>
+        <option value="23">ブル</option>
+        <option value="24">エレファント</option>
+        <option value="25">モンキー</option>
+        <option value="26">スネーク</option>
+        <option value="27">ドッグ</option>
+
+    </select>
+
+    <select class="children skill dummy" style="display: none">
+        <option value="" data-val="extension" disabled  selected>----スキルのレアリティ----</option>
+        
+        <option value="5000" data-val="extension">Legendary</option>
+        <option value="4000" data-val="extension">Epic</option>
+        <option value="3000" data-val="extension">Rare</option>
+        <option value="2000" data-val="extension">Uncommon</option>
+        <option value="1000" data-val="extension">Common</option>
+        <option value="70000" data-val="extension">RepS</option>
+        <option value="60000" data-val="extension">RepA</option>
+        <option value="50000" data-val="extension">RepB</option>
+        <option value="40000" data-val="extension">RepC</option>
+        <option value="30000" data-val="extension">RepD</option>
+        <option value="20000" data-val="extension">RepE</option>
+        <option value="10000" data-val="extension">RepF</option>
+
+        <option value="" data-val="art_edit" disabled>アートエディットスキル</option>
+        <option value="0" data-val="art_edit">休む</option>
+        <option value="1" data-val="art_edit">レッドストライク</option>
+        <option value="2" data-val="art_edit">ハット・トリック</option>
+        <option value="3" data-val="art_edit">Punks Not Dead</option>
+        <option value="4" data-val="art_edit">マゼンタマッシュルーム</option>
+        <option value="5" data-val="art_edit">ゴロゴロパンチ</option>
+        <option value="6" data-val="art_edit">無垢なる忠誠</option>
+        <option value="7" data-val="art_edit">サイドワインダー</option>
+        <option value="8" data-val="art_edit">女神のウインク</option>
+        <option value="9" data-val="art_edit">自由の女神</option>
+        <option value="10" data-val="art_edit">ブラックシャウト</option>
+        <option value="11" data-val="art_edit">モンキー・マジック</option>
+        <option value="12" data-val="art_edit">ガールズ・トーク</option>
+        <option value="13" data-val="art_edit">ダンディズム</option>
+        <option value="14" data-val="art_edit">中二病</option>
+        <option value="15" data-val="art_edit">万里の長城</option>
+        <option value="16" data-val="art_edit">霊峰富士</option>
+        <option value="17" data-val="art_edit">イエローブラスト</option>
+        <option value="18" data-val="art_edit">グリーンリース</option>
+        <option value="19" data-val="art_edit">シアンフロスト</option>
+        <option value="20" data-val="art_edit">ハード・トレーニング</option>
+        <option value="21" data-val="art_edit">ハイ・フライヤー</option>
+        <option value="22" data-val="art_edit">フル・スロットル</option>
+        <option value="23" data-val="art_edit">ブルーブロッサム</option>
+        <option value="24" data-val="art_edit">眼鏡効果</option>
+        <option value="25" data-val="art_edit">ホワイトキャンディー</option>
+        <option value="26" data-val="art_edit">森林浴</option>
+        <option value="27" data-val="art_edit">無条件幸福</option>
+        <option value="28" data-val="art_edit">紳士の品格</option>
+
+
+
+    </select>
+        
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+
+
+
+</html>

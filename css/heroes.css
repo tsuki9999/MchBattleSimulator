@@ -1,0 +1,65 @@
+﻿body {
+    font-family: "メイリオ", sans-serif;
+}
+
+.container {
+    background-color: #3b3b3b;
+}
+
+fieldset {
+    padding: 10px 5px;
+}
+
+h1 {
+    text-align: center;
+    background-color:#3b3b3b;
+    color: white;
+    border-radius: 0.3rem;
+
+
+}
+
+h2 {
+    text-align: center;
+}
+
+select {
+    border-radius: 0.3rem;
+    width: 220px;
+    border: 1px solid #e6e6e6;
+    background-color: #5a5a5a;
+    color: #ffffff;
+    margin: 0 5px;
+}
+
+select:disabled {
+    color: #999999;
+}
+
+input {
+    width: 3.2rem;
+    border-radius: 0.3rem;
+    border: 1px solid #e6e6e6;
+    background-color: #5a5a5a;
+    color: #ffffff;
+    text-align: center;
+    margin: 0 5px;
+}
+
+.Side {
+    padding: 0;
+}
+
+.Order {
+    border: medium solid white;
+    background-color:#3b3b3b;
+    color: white;
+    border-radius: 0.3rem;
+    margin-bottom: 20px;
+}
+
+
+.text {
+    width: 100%;
+    resize: none;
+}
