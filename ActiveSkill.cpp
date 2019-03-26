@@ -919,18 +919,23 @@ void Battle::repS_cross_spear( Position p ) {
 // original
 void Battle::novice_cross_spear( Position p ) {
     damageSkill( p, FrontEnemy, 20, 25, PHY, ACTIVE_DAMAGE );
+    damageSkill( p, FrontEnemy, 20, 25, PHY, ACTIVE_DAMAGE );
 }
 void Battle::elite_cross_spear( Position p ) {
+    damageSkill( p, FrontEnemy, 22, 27, PHY, ACTIVE_DAMAGE );
     damageSkill( p, FrontEnemy, 22, 27, PHY, ACTIVE_DAMAGE );
 }
 void Battle::brave_cross_spear( Position p ) {
     damageSkill( p, FrontEnemy, 25, 30, PHY, ACTIVE_DAMAGE );
+    damageSkill( p, FrontEnemy, 25, 30, PHY, ACTIVE_DAMAGE );
 }
 void Battle::bone_piercing_cross_spear( Position p ) {
+    damageSkill( p, FrontEnemy, 30, 35, PHY, ACTIVE_DAMAGE );
     damageSkill( p, FrontEnemy, 30, 35, PHY, ACTIVE_DAMAGE );
     changeAttrSkill( p, FrontAlly, PHY, PHY, 5, BUFF );
 }
 void Battle::tonbokiri( Position p ) {
+    damageSkill( p, FrontEnemy, 30, 40, PHY, ACTIVE_DAMAGE );
     damageSkill( p, FrontEnemy, 30, 40, PHY, ACTIVE_DAMAGE );
     changeAttrSkill( p, FrontAlly, PHY, PHY, 10, BUFF );
 }
@@ -1258,7 +1263,8 @@ void Battle::repA_bull( Position p ) {
     changeAttrSkill( p, OneSelf, PHY, PHY, 9, DEBUFF );
 }
 void Battle::repS_bull( Position p ) {
-    // 調査中
+    damageSkill( p, AllEnemy, 35, 45, PHY, ACTIVE_DAMAGE );
+    changeAttrSkill( p, OneSelf, PHY, PHY, 8, DEBUFF );
 }
 // original
 void Battle::novice_bull( Position p ) {
