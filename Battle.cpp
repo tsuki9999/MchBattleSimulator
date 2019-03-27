@@ -1213,11 +1213,6 @@ void Battle::resetAllDamaged() {
 }
 
 
-int Battle::getNumberOfAction() {
-    return n_action;
-}
-
-
 
 // すべてのヒーローを初期状態に戻す
 void Battle::resetBattle() {
@@ -1456,6 +1451,20 @@ bool Battle::determineStatusAilment( int int_attack, int int_attacked ) {
 // 混乱や睡眠が解除されるかどうか決める
 bool Battle::determineNormalization() {
     return determineByDice(50);
+}
+
+
+// p の位置にいるヒーローのある能力値が初期値より下がっている分の数値を返す（下がっていなかったら０を返す）
+int Battle::calcDebuff( Position p, Attr a ) {
+    return max( ( heroes[p.side][p.order].getInitAttr(a) - heroes[p.side][p.order].attr_battle[a] ), 0 );
+}
+// ある Side のヒーローたちのある能力値が初期値より下がっている分の合計値を返す（下がっていないときは０として計算する）
+int Battle::calcDebuff( Side s, Attr a ) {
+    int ret = 0;
+    for ( Order o = Front; o < Order_End; o++ ) {
+        ret += max( ( heroes[s][o].getInitAttr(a) - heroes[s][o].attr_battle[a] ), 0 );
+    }
+    return ret;
 }
 
 

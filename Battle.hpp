@@ -7,14 +7,16 @@
 
 class Battle {
     
+
     private:
 
     Hero heroes[2][3];
 
     mt19937 mt{ random_device{}() };
 
-    // vector< vector<Hero*> > heroes;
-    
+    // ログ出力するときは true になる
+    // ログ出力ファイルを開くのに成功したら true 閉じたときに false に戻す
+    bool print_battle_log = true;
 
     // アクション数
     int n_action = 0;
@@ -25,7 +27,6 @@ class Battle {
     // バトル開始時かどうか
     // バトル開始時にパッシブスキルが発動するかチェックする前に true にし、チェックが終了したら false にする    
     bool pre_battle;
-
 
     // バトルログを出力するファイルストリーム
     ofstream ofs_battle_log;
@@ -60,36 +61,17 @@ class Battle {
     // 状態異常が回復するかどうか、確率で決定
     bool determineNormalization();
 
+    // p の位置にいるヒーローのある能力値が初期値より下がっている分の数値を返す（下がっていなかったら０を返す）
+    int calcDebuff( Position p, Attr a );
+    // ある Side のヒーローたちのある能力値が初期値より下がっている分の合計値を返す（下がっていなかったら０を返す）
+    int calcDebuff( Side s, Attr a );
+
+
     // アクティブスキルを使用
     void useActiveSkill( Position p );
     // パッシブスキルを使用
     bool usePassiveSkill( Position p );
 
-    public:
-
-    Battle() {}
-
-    // p の位置にいるヒーローの ID、能力値、アクティブスキルのIDをセット
-    void setHero( Position p, ID i,  int attr[], ACTIVE_SKILL_ID active_skill_index[] ) {
-        heroes[p.side][p.order].set( i, p.side, p.order, attr, active_skill_index );
-    }
-
-    
-    // 戦闘開始して、200アクション経過するかどちらかのチームが全滅するまでループ
-    void startBattle();
-    // s の側のチームが全滅しているかどうか
-    bool isEndGameByDead( Side s );
-    
-    // ログ出力用ファイルを開く
-    // ファイルを正しく開けたら true を返す
-    bool fileOpen(); 
-    // ログ出力用ファイルを閉じる
-    void fileClose();
-
-    // ログ出力するときは true になる
-    // ログ出力ファイルを開くのに成功したら true 閉じたときに false に戻す
-    bool print_battle_log = true;
-    
     
     /* ---------------------- 対象のヒーローを探す ---------------------- */
 
@@ -215,20 +197,14 @@ class Battle {
     // 死亡時に一度だけ prob% の確率で
     bool usePassiveDying( Position p, int prob );
 
+
+
+
     // アクティブスキルによってダメージを受けたときに立つフラグをリセットする
     void resetAllDamaged();
 
 
-    // アクション数を返す
-    int getNumberOfAction();
 
-
-    
-    // すべてのヒーローを初期状態に戻す
-    void resetBattle();
-    
-
-    
     /* ---------------------- ログに出力 ---------------------- */
 
     // ログに罫線を出力
@@ -272,11 +248,37 @@ class Battle {
     int getDamaged( Position p );
 
 
+    
+    public:
+
+    Battle() {}
+
+    // p の位置にいるヒーローの ID、能力値、アクティブスキルのIDをセット
+    void setHero( Position p, ID i,  int attr[], ACTIVE_SKILL_ID active_skill_index[] ) {
+        heroes[p.side][p.order].set( i, p.side, p.order, attr, active_skill_index );
+    }
+
+    // 戦闘開始して、200アクション経過するかどちらかのチームが全滅するまでループ
+    void startBattle();
+    // s の側のチームが全滅しているかどうか
+    bool isEndGameByDead( Side s );
+    
+    // ログ出力用ファイルを開く
+    // ファイルを正しく開けたら true を返す
+    bool fileOpen(); 
+    // ログ出力用ファイルを閉じる
+    void fileClose();
+    
+    // すべてのヒーローを初期状態に戻す
+    void resetBattle();
+
+
 
     /* ---------------------- Active Skill ---------------------- */
 
     // ACTIVE_SKILL_ID　→　functionPointerTable の index
     int convertIDToFunctionIndex( ACTIVE_SKILL_ID id );
+
 
     void active_skill( ACTIVE_SKILL_ID id, Position p );
 
