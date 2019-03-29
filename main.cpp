@@ -74,7 +74,7 @@ int main() {
                 return 0;
             }
             attr[a] = stoi( s );
-            if ( attr[a] < 0 || attr[a] > 999 ) {
+            if ( attr[a] < 0 || ( a != HP && attr[a] > 999 ) ) {
                 cout << "hero status error" << endl; 
                 system("pause");
                 return 0;
