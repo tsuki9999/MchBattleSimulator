@@ -78,7 +78,7 @@ class Battle {
     // ある Side の（生存している）すべてのヒーローの Positon を返す
     vector<Position> searchAll( Side s );
     // （生存している）敵味方すべてのヒーローの Position を返す
-    vector<Position> searchAll();
+    vector<Position> searchAll( Position p );
 
     // ある Side の（生存している中で）先頭のヒーローを探す
     Position searchFrontHero( Side s );

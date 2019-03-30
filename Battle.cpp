@@ -295,13 +295,21 @@ vector<Position> Battle::searchAll( Side s ) {
     return ret;
 }
 // （生存している）敵味方すべてのヒーローの Position を返す
-vector<Position> Battle::searchAll() {
+vector<Position> Battle::searchAll( Position p ) {
     vector< Position > ret;
-    for ( Side s = Attack; s < Side_End; s++ ) {
+
+    Side s = oppositeSide( p.side );
+
     for ( Order o = Front; o < Order_End; o++ ) {
         Position p = { s, o };
         if ( !isDead( p ) ) { ret.push_back( p ); }
     }
+
+    s = p.side;
+
+    for ( Order o = Front; o < Order_End; o++ ) {
+        Position p = { s, o };
+        if ( !isDead( p ) ) { ret.push_back( p ); }
     }
 
     if ( ret.empty() ) {
@@ -422,7 +430,7 @@ vector<Position> Battle::searchTarget( Position p, Target t ) {
             target = searchAll( s_enemy );
             break;
         case AllHero: // 敵味方すべて
-            target = searchAll();
+            target = searchAll( p );
             break;
         case FrontAlly: // 味方の先頭
             target.push_back( searchFrontHero( s_ally ) );
@@ -635,12 +643,14 @@ void Battle::changeAttrSkill( Position p, Target t, Attr a_change, Attr a_ref, i
     vector<Position> target = searchTarget( p, t );
     if ( target[0].side == Side_End && target[0].order == Order_End ) { return; }
 
-    // a_ref の値の rate%
-    int delta = ( heroes[p.side][p.order].attr_battle[a_ref] * rate ) / 100;    
+    
 
     // スキル効果対象ヒーローに対して、rate% の （バフ・デバフ）を a_change に与える
     for ( Position& p_target : target ) {
-        
+
+        // a_ref の値の rate%
+        int delta = ( heroes[p.side][p.order].attr_battle[a_ref] * rate ) / 100;
+
         // 能力値変化
         is_buff ? giveBuff( p_target, a_change, delta ) : giveDebuff( p_target, a_change, delta );
     }
@@ -652,16 +662,16 @@ void Battle::changeAttrSkill( Position p, Target t, vector<Attr> a_change, Attr 
     vector<Position> target = searchTarget( p, t );
     if ( target[0].side == Side_End && target[0].order == Order_End ) { return; }
 
-    // a_ref の値の rate%
-    int delta = ( heroes[p.side][p.order].attr_battle[a_ref] * rate ) / 100;
 
     // スキル効果対象ヒーローに対して、rate% の （バフ・デバフ）を a_change に与える
+    for ( Attr& a_target: a_change ) {
     for ( Position& p_target : target ) {
-        
-        for ( Attr& a_target: a_change ) {
-            // 能力値変化
-            is_buff ? giveBuff( p_target, a_target, delta ) : giveDebuff( p_target, a_target, delta );
-        }
+                
+        // a_ref の値の rate%
+        int delta = ( heroes[p.side][p.order].attr_battle[a_ref] * rate ) / 100;
+        // 能力値変化
+        is_buff ? giveBuff( p_target, a_target, delta ) : giveDebuff( p_target, a_target, delta );
+    }
     }
 
 }
@@ -671,11 +681,12 @@ void Battle::changeAttrSkill( Position p, Target t, Attr a_change, Attr a_ref, i
     vector<Position> target = searchTarget( p, t );
     if ( target[0].side == Side_End && target[0].order == Order_End ) { return; }
 
-    // a_ref の値
-    int delta = heroes[p.side][p.order].attr_battle[a_ref];
 
     // スキル効果対象ヒーローに対して、rate% の （バフ・デバフ）を a_change に与える
     for ( Position& p_target : target ) {
+        
+        // a_ref の値
+        int delta = heroes[p.side][p.order].attr_battle[a_ref];
 
         int rate = Dice( rateA, rateB );
         delta = delta * rate / 100;
@@ -690,20 +701,19 @@ void Battle::changeAttrSkill( Position p, Target t, vector<Attr> a_change, Attr 
     vector<Position> target = searchTarget( p, t );
     if ( target[0].side == Side_End && target[0].order == Order_End ) { return; }
 
-    // a_ref の値
-    int delta = heroes[p.side][p.order].attr_battle[a_ref];
 
     // スキル効果対象ヒーローに対して、rate% の （バフ・デバフ）を a_change に与える
-    for ( Position& p_target : target ) {
-        
-        for ( Attr& ac: a_change ) {
+    for ( Attr& ac: a_change ) {
+    for ( Position& p_target : target ) {    
+        // a_ref の値
+        int delta = heroes[p.side][p.order].attr_battle[a_ref];        
 
-            int rate = Dice( rateA, rateB );
-            delta = delta * rate / 100;
+        int rate = Dice( rateA, rateB );
+        delta = delta * rate / 100;
 
-            // 能力値変化
-            is_buff ? giveBuff( p_target, ac, delta ) : giveDebuff( p_target, ac, delta );
-        }
+        // 能力値変化
+        is_buff ? giveBuff( p_target, ac, delta ) : giveDebuff( p_target, ac, delta );
+    }
     }
 }
 
@@ -729,9 +739,8 @@ void Battle::changeAttrSkill( Position p, Attr a_target, bool is_high, bool is_a
     Position p_target = is_high ? searchHighestAttrHero( s_target, a_target ) : searchLowestAttrHero( s_target, a_target );
     if ( p_target.side == Side_End && p_target.order == Order_End ) { return; }
 
-    int delta = heroes[p.side][p.order].attr_battle[a_ref] * rate / 100;
-
-    for ( Attr ac : a_change ) {        
+    for ( Attr ac : a_change ) {
+        int delta = heroes[p.side][p.order].attr_battle[a_ref] * rate / 100;
         is_buff ? giveBuff( p_target, ac, delta ) : giveDebuff( p_target, ac, delta );
     }    
 
@@ -759,10 +768,8 @@ void Battle::changeAttrSkill( Position p, Attr a_target, bool is_high, bool is_a
     Position p_target = is_high ? searchHighestAttrHero( s_target, a_target ) : searchLowestAttrHero( s_target, a_target );
     if ( p_target.side == Side_End && p_target.order == Order_End ) { return; }
 
-    int delta = heroes[p.side][p.order].attr_battle[a_ref];
-
     for ( Attr ac : a_change ) {
-
+        int delta = heroes[p.side][p.order].attr_battle[a_ref];
         int rate = Dice( rateA, rateB );
         delta = delta * rate / 100;
 
