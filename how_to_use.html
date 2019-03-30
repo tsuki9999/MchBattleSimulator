@@ -1,0 +1,106 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+<head>
+        <title>MchBattleSimulator・使い方</title>
+    <meta charset="utf-8">
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+</head>
+<body>
+
+    <header>
+
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="https://tsuki9999.github.io/MchBattleSimulator/index.html">MchBattleSimulator</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://tsuki9999.github.io/MchBattleSimulator/download.html">ダウンロード</a>
+                </li>
+                <li class="nav-item">
+                        <a class="nav-link" href="https://tsuki9999.github.io/MchBattleSimulator/how_to_use.html">使い方</a>
+                </li>
+                <li class="nav-item">
+                        <a class="nav-link" href="https://tsuki9999.github.io/MchBattleSimulator/heroes.html">チーム編成</a>
+                </li>
+                </ul>
+            </div>
+        </nav>
+
+
+    </header>
+
+
+    <section class="container mt-5">
+
+        <h4 id="download" class="mb-5">1. ダウンロードして展開</h4>
+
+            <h3> <a href="https://github.com/tsuki9999/MchBattleSimulator/releases" target="_blank">GitHub - MchBattleSimulator</a> </h1>
+            <p class="py-5">
+                上のリンクをクリックすると、このようなサイトが表示されます。                        
+            </p>
+            <img src="img/github_release.png">
+            
+            <p class="py-5">
+                v の後の数字は変わっていると思いますが、一番上のものを選んでください。<br>
+                矢印のリンクをクリックするとダウンロードされます。<br>
+                ダウンロードできたらZIPファイルを展開し、適当な場所に保存すればOKです。
+            </p>
+    
+        <h4 id="spreadsheet" class="mb-5">2. シミュレートするチームを編成、IDと能力値をheroes.txtに貼り付け</h4>
+
+            <p>
+                <a href="https://tsuki9999.github.io/MchBattleSimulator/heroes.html" target="_blank">チーム編成専用ページ</a>で編成を行うと、
+                ページ最下部にIDと能力値を示す数値が表示されます。<br>
+
+                数値をすべてコピーして、先ほどダウンロードして展開してできたフォルダの中にあるheroes.txtというファイルに貼り付けてください。<br><br>
+
+                もしくは、<a href="https://tsuki9999.github.io/MchBattleSimulator/spreadsheet.html" target="_blank">スプレッドシート上で編成する方法</a>もあります。<br>
+                使いやすい方で編成してください。
+                
+            </p>
+
+        <h4 id="simulator" class="my-5">3. シミュレータの起動、バトルの実行、結果の確認</h4>
+
+            <p>
+                シミュレータを起動するには、ダウンロードして展開したフォルダの「MchBattleSimulator_(バージョン名).exe」を<br>
+                ダブルクリックしてください。<br>
+                （コマンドプロンプトを使い慣れている方はそちらからどうぞ）
+            </p>
+            <p>
+                シミュレータが起動すると真っ黒な画面が開くので、<br>
+                そこに実行したいバトル数を半角数字で入力してください。<br>
+                （100~1000くらいがおすすめです）<br>
+            </p>
+            <p>
+                指定したバトル数が終了すると、Attack側から見た勝ち数と負け数が表示されます。<br>
+                最後に「続行するには何かキーを押してください」というメッセージが表示されるので、<br>
+                何かキーを押すと終了します。<br>
+            </p>
+            <p>
+                シミュレーションごとの記録は、シミュレータがあるフォルダに battle_log_(番号) という名前で保存されます。<br>
+                １回のシミュレーションにつき、最初の10戦だけ記録されます。
+            </p>
+        
+    </section>
+        
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+
+</body>
+</html>
