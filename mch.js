@@ -19,33 +19,37 @@ const RepD = 30000;
 const RepE = 20000;
 const RepF = 10000;
 
-const  Blade = 1;
-const  Musket = 2;
-const  Quill = 3;
-const  Armor = 4;
-const  Horse = 5;
-const  Katana = 6;
-const  Cutie = 7;
-const  Book = 8;
-const  Ring = 9;
-const  Shield = 10;
-const  Axe = 11;
-const  Etheremon = 12;
-const  Yumi = 13;
-const  CrossSpear = 14;
-const  Halberd = 15;
-const  Scrolls = 16;
-const  Necklace = 17;
-const  Kabuto = 18;
-const  Turtle = 19;
-const  Roostler = 20;
-const  Tiger = 21;
-const  Dragon = 22;
-const  Bull = 23;
-const  Elephant = 24;
-const  Monkey = 25;
-const  Snake = 26;
-const  Dog = 27;
+const Blade = 1;
+const Musket = 2;
+const Quill = 3;
+const Armor = 4;
+const Horse = 5;
+const Katana = 6;
+const Cutie = 7;
+const Book = 8;
+const Ring = 9;
+const Shield = 10;
+const Axe = 11;
+const Etheremon = 12;
+const Yumi = 13;
+const CrossSpear = 14;
+const Halberd = 15;
+const Scrolls = 16;
+const Necklace = 17;
+const Kabuto = 18;
+const Turtle = 19;
+const Roostler = 20;
+const Tiger = 21;
+const Dragon = 22;
+const Bull = 23;
+const Elephant = 24;
+const Monkey = 25;
+const Snake = 26;
+const Dog = 27;
+const Rapier = 28;
+const Revolver = 29;
+const Goblet = 30;
+const Boots = 31;
 
 function isLandExtension( a ) {
     return Turtle <= a && a <= Dog;
@@ -513,6 +517,55 @@ const ExtensionAttr = {
     50027: { HP:0,PHY:0,INT:34,AGI:34 },
     60027: { HP:0,PHY:0,INT:42,AGI:42 },
     70027: { HP:0,PHY:0,INT:0,AGI:0 },
+    1028: { HP:0,PHY:40,INT:0,AGI:39 },
+    2028: { HP:0,PHY:49,INT:0,AGI:48 },
+    3028: { HP:0,PHY:58,INT:0,AGI:57 },
+    4028: { HP:0,PHY:67,INT:0,AGI:66 },
+    5028: { HP:0,PHY:76,INT:0,AGI:75 },
+    10028: { HP:0,PHY:0,INT:0,AGI:0 },
+    20028: { HP:0,PHY:0,INT:0,AGI:0 },
+    30028: { HP:0,PHY:0,INT:0,AGI:0 },
+    40028: { HP:0,PHY:0,INT:0,AGI:0 },
+    50028: { HP:0,PHY:0,INT:0,AGI:0 },
+    60028: { HP:0,PHY:0,INT:0,AGI:0 },
+    70028: { HP:0,PHY:0,INT:0,AGI:0 },
+    1029: { HP:0,PHY:0,INT:40,AGI:39 },
+    2029: { HP:0,PHY:0,INT:49,AGI:48 },
+    3029: { HP:0,PHY:0,INT:58,AGI:57 },
+    4029: { HP:0,PHY:0,INT:67,AGI:66 },
+    5029: { HP:0,PHY:0,INT:76,AGI:75 },
+    10029: { HP:0,PHY:0,INT:0,AGI:0 },
+    20029: { HP:0,PHY:0,INT:0,AGI:0 },
+    30029: { HP:0,PHY:0,INT:0,AGI:0 },
+    40029: { HP:0,PHY:0,INT:0,AGI:0 },
+    50029: { HP:0,PHY:0,INT:0,AGI:0 },
+    60029: { HP:0,PHY:0,INT:0,AGI:0 },
+    70029: { HP:0,PHY:0,INT:0,AGI:0 },
+    1030: { HP:117,PHY:0,INT:40,AGI:0 },
+    2030: { HP:147,PHY:0,INT:48,AGI:0 },
+    3030: { HP:171,PHY:0,INT:58,AGI:0 },
+    4030: { HP:201,PHY:0,INT:66,AGI:0 },
+    5030: { HP:225,PHY:0,INT:76,AGI:0 },
+    10030: { HP:0,PHY:0,INT:0,AGI:0 },
+    20030: { HP:0,PHY:0,INT:0,AGI:0 },
+    30030: { HP:0,PHY:0,INT:0,AGI:0 },
+    40030: { HP:0,PHY:0,INT:0,AGI:0 },
+    50030: { HP:0,PHY:0,INT:0,AGI:0 },
+    60030: { HP:0,PHY:0,INT:0,AGI:0 },
+    70030: { HP:0,PHY:0,INT:0,AGI:0 },
+    1031: { HP:177,PHY:0,INT:0,AGI:20 },
+    2031: { HP:219,PHY:0,INT:0,AGI:24 },
+    3031: { HP:258,PHY:0,INT:0,AGI:29 },
+    4031: { HP:291,PHY:0,INT:0,AGI:32 },
+    5031: { HP:339,PHY:0,INT:0,AGI:38 },
+    10031: { HP:0,PHY:0,INT:0,AGI:0 },
+    20031: { HP:0,PHY:0,INT:0,AGI:0 },
+    30031: { HP:0,PHY:0,INT:0,AGI:0 },
+    40031: { HP:0,PHY:0,INT:0,AGI:0 },
+    50031: { HP:0,PHY:0,INT:0,AGI:0 },
+    60031: { HP:0,PHY:0,INT:0,AGI:0 },
+    70031: { HP:0,PHY:0,INT:0,AGI:0 },
+    
 
 };
 
@@ -804,6 +857,13 @@ $(document).ready( function(){
                 // ドッグのRepS
                 if ( type == Dog && rarity >= RepA ) {
                     $(this).remove();
+                }
+
+                // ノード1.3のレプリカ
+                if ( type == Rapier || type == Revolver || type == Goblet || type == Boots ) {
+                    if ( rarity >= RepF ) {
+                        $(this).remove();
+                    }
                 }
 
                 // 存在しない
