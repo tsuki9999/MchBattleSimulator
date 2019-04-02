@@ -122,7 +122,6 @@ class Battle {
 
     // is_active が true : アクティブスキルによるダメージ
 
-    
     // p の位置にいるヒーローが、Target に rate% の PHY/INT ダメージを与える
     void damageSkill( Position p, Target t, int rate, Attr a_damage, bool is_active );
     // p の位置にいるヒーローが、Target に rateA ~ rateB% の PHY/INT ダメージを与える    
@@ -319,7 +318,7 @@ class Battle {
     // original
     void novice_quill( Position p );
     void elite_quill( Position p );
-    void wizdom_quill( Position p );
+    void wisdom_quill( Position p );
     void master_musicians_quill( Position p );
     void playwrights_quill( Position p );
 
@@ -373,7 +372,7 @@ class Battle {
     // original
     void novice_book( Position p );
     void elite_book( Position p );
-    void wizdom_book( Position p );
+    void wisdom_book( Position p );
     void crime_and_punishment( Position p );
     void codex_atlanticus( Position p );
     
@@ -385,7 +384,7 @@ class Battle {
     // original
     void novice_ring( Position p );
     void elite_ring( Position p );
-    void wizdom_ring( Position p );
+    void wisdom_ring( Position p );
     void mysterious_stone_glow( Position p );
     void ring_of_the_queen( Position p );
     
@@ -465,7 +464,7 @@ class Battle {
     // original
     void novice_scrolls( Position p );
     void elite_scrolls( Position p );
-    void wizdom_scrolls( Position p );
+    void wisdom_scrolls( Position p );
     void the_art_of_war( Position p );
     void da_tang_western_region( Position p );
     
@@ -477,7 +476,7 @@ class Battle {
     // original
     void novice_necklace( Position p );
     void elite_necklace( Position p );
-    void wizdom_necklace( Position p );
+    void wisdom_necklace( Position p );
     void siberian_cedar_necklace( Position p );
     void necklace_of_the_sun_god( Position p );
     
@@ -501,7 +500,7 @@ class Battle {
     // original
     void novice_turtle( Position p );
     void elite_turtle( Position p );
-    void wizdom_turtle( Position p );
+    void wisdom_turtle( Position p );
     void akeron( Position p );
     void akupara( Position p );
     
@@ -537,7 +536,7 @@ class Battle {
     // original
     void novice_dragon( Position p );
     void elite_dragon( Position p );
-    void wizdom_dragon( Position p );
+    void wisdom_dragon( Position p );
     void wyvern_dragon( Position p );
     void golden_dragon( Position p );
     
@@ -573,7 +572,7 @@ class Battle {
     // original
     void novice_monkey( Position p );
     void elite_monkey( Position p );
-    void wizdom_monkey( Position p );
+    void wisdom_monkey( Position p );
     void silver_back( Position p );
     void hihi( Position p );
     
@@ -585,7 +584,7 @@ class Battle {
     // original
     void novice_snake( Position p );
     void elite_snake( Position p );
-    void wizdom_snake( Position p );
+    void wisdom_snake( Position p );
     void king_cobra( Position p );
     void quetzalcoatl( Position p );
     
@@ -597,9 +596,58 @@ class Battle {
     // original
     void novice_dog( Position p );
     void elite_dog( Position p );
-    void wizdom_dog( Position p );
+    void wisdom_dog( Position p );
     void molossus( Position p );
     void shippei_taro( Position p );
+
+    // xxxx28    Rapier      レイピア
+    // replica
+    void repB_rapier( Position p );
+    void repA_rapier( Position p );
+    void repS_rapier( Position p );
+    // original
+    void novice_rapier( Position p );
+    void elite_rapier( Position p );
+    void brave_rapier( Position p );
+    void espada_ropera( Position p );
+    void flamberge( Position p );
+
+    // xxxx29    Revolver    リボルバー
+    // replica
+    void repB_revolver( Position p );
+    void repA_revolver( Position p );
+    void repS_revolver( Position p );
+    // original
+    void novice_revolver( Position p );
+    void elite_revolver( Position p );
+    void wisdom_revolver( Position p );
+    void dragoon( Position p );
+    void model_1( Position p );
+
+    // xxxx30    Goblet      ゴブレット
+    // replica
+    void repB_goblet( Position p );
+    void repA_goblet( Position p );
+    void repS_goblet( Position p );
+    // original
+    void novice_goblet( Position p );
+    void elite_goblet( Position p );
+    void wisdom_goblet( Position p );
+    void goblet_of_kowakamai( Position p );
+    void holy_grail( Position p );
+
+    // xxxx31    Boots       ブーツ
+    // replica
+    void repB_boots( Position p );
+    void repA_boots( Position p );
+    void repS_boots( Position p );
+    // original
+    void novice_boots( Position p );
+    void elite_boots( Position p );
+    void brave_boots( Position p );
+    void great_western_boots( Position p );
+    void kobold_boots( Position p );
+
     
 
     // アートエディットスキル

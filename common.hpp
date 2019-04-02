@@ -61,7 +61,7 @@ const ACTIVE_SKILL_ID REP_F = 10000;
 
 /*
 xxxxx1    blade       ブレード
-xxxxx2    musket  　  マスケット
+xxxxx2    musket      マスケット
 xxxxx3    Quill       ペン
 xxxxx4    Armor       アーマー
 xxxxx5    Horse       ホース
@@ -87,10 +87,14 @@ xxxx24    Elephant    エレファント
 xxxx25    Monkey      モンキー
 xxxx26    Snake       スネーク
 xxxx27    Dog         ドッグ
+xxxx28    Rapier      レイピア
+xxxx29    Revolver    リボルバー
+xxxx30    Goblet      ゴブレット
+xxxx31    Boots       ブーツ
 */
 
 /* !!!!!!!!!!!!!!!!!!!!!!!!!!!!エクステンションが追加されたら変更すること!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
-const int n_extension_type = 27;
+const int n_extension_type = 31;
 
 const int n_replica_rank = 7; // F ~ S
 const int n_original_rank = 5; // common ~ legendary
@@ -105,7 +109,7 @@ const int n_art_edit_skill = 29;
 enum ExtensionType {
     DUMMY, BLADE, MUSKET, QUILL, ARMOR, HORSE, KATANA, CUTIE, BOOK, RING,
     SHIELD, AXE, ETHEREMON, YUMI, SPEAR, HALBERD, SCROLLS, NECKLACE, KABUTO, TURTLE,
-    ROOSTLER, TIGER, DRAGON, BULL, ELEPHANT, MONKEY, SNAKE, DOG
+    ROOSTLER, TIGER, DRAGON, BULL, ELEPHANT, MONKEY, SNAKE, DOG, RAPIER, REVOLVER, GOBLET, BOOTS,
 };
 
 enum ActiveSkillType {
@@ -254,7 +258,6 @@ int convertIDToHeroIndex( ID id );
 string convertIDToHeroName( ID id );
 
 
-ACTIVE_SKILL_ID convertExtensionNameToID( string s );
 string convertIDToExtensionName( ACTIVE_SKILL_ID id );
 bool isValidActiveSkillID( ACTIVE_SKILL_ID id );
 

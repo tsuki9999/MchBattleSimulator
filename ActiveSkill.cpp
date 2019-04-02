@@ -71,7 +71,7 @@ void (Battle::*functionPointerTableActive[])( Position p ) = {
     // original
     &Battle::novice_quill,
     &Battle::elite_quill,
-    &Battle::wizdom_quill,
+    &Battle::wisdom_quill,
     &Battle::master_musicians_quill,
     &Battle::playwrights_quill,
 
@@ -150,7 +150,7 @@ void (Battle::*functionPointerTableActive[])( Position p ) = {
     // original
     &Battle::novice_book,
     &Battle::elite_book,
-    &Battle::wizdom_book,
+    &Battle::wisdom_book,
     &Battle::crime_and_punishment,
     &Battle::codex_atlanticus,
 
@@ -166,7 +166,7 @@ void (Battle::*functionPointerTableActive[])( Position p ) = {
     // original
     &Battle::novice_ring,
     &Battle::elite_ring,
-    &Battle::wizdom_ring,
+    &Battle::wisdom_ring,
     &Battle::mysterious_stone_glow,
     &Battle::ring_of_the_queen,
 
@@ -277,7 +277,7 @@ void (Battle::*functionPointerTableActive[])( Position p ) = {
     // original
     &Battle::novice_scrolls,
     &Battle::elite_scrolls,
-    &Battle::wizdom_scrolls,
+    &Battle::wisdom_scrolls,
     &Battle::the_art_of_war,
     &Battle::da_tang_western_region,
 
@@ -293,7 +293,7 @@ void (Battle::*functionPointerTableActive[])( Position p ) = {
     // original
     &Battle::novice_necklace,
     &Battle::elite_necklace,
-    &Battle::wizdom_necklace,
+    &Battle::wisdom_necklace,
     &Battle::siberian_cedar_necklace,
     &Battle::necklace_of_the_sun_god,
 
@@ -325,7 +325,7 @@ void (Battle::*functionPointerTableActive[])( Position p ) = {
     // original
     &Battle::novice_turtle,
     &Battle::elite_turtle,
-    &Battle::wizdom_turtle,
+    &Battle::wisdom_turtle,
     &Battle::akeron,
     &Battle::akupara,
 
@@ -373,7 +373,7 @@ void (Battle::*functionPointerTableActive[])( Position p ) = {
     // original
     &Battle::novice_dragon,
     &Battle::elite_dragon,
-    &Battle::wizdom_dragon,
+    &Battle::wisdom_dragon,
     &Battle::wyvern_dragon,
     &Battle::golden_dragon,
 
@@ -421,7 +421,7 @@ void (Battle::*functionPointerTableActive[])( Position p ) = {
     // original
     &Battle::novice_monkey,
     &Battle::elite_monkey,
-    &Battle::wizdom_monkey,
+    &Battle::wisdom_monkey,
     &Battle::silver_back,
     &Battle::hihi,
 
@@ -437,7 +437,7 @@ void (Battle::*functionPointerTableActive[])( Position p ) = {
     // original
     &Battle::novice_snake,
     &Battle::elite_snake,
-    &Battle::wizdom_snake,
+    &Battle::wisdom_snake,
     &Battle::king_cobra,
     &Battle::quetzalcoatl,
 
@@ -453,9 +453,75 @@ void (Battle::*functionPointerTableActive[])( Position p ) = {
     // original
     &Battle::novice_dog,
     &Battle::elite_dog,
-    &Battle::wizdom_dog,
+    &Battle::wisdom_dog,
     &Battle::molossus,
     &Battle::shippei_taro,
+
+    // xxxx28    Rapier      レイピア
+    // replica
+    &Battle::repB_rapier,
+    &Battle::repB_rapier,
+    &Battle::repB_rapier,
+    &Battle::repB_rapier,
+    &Battle::repB_rapier,
+    &Battle::repA_rapier,
+    &Battle::repS_rapier,
+    // original
+    &Battle::novice_rapier,
+    &Battle::elite_rapier,
+    &Battle::brave_rapier,
+    &Battle::espada_ropera,
+    &Battle::flamberge,
+
+    // xxxx29    Revolver    リボルバー
+    // replica
+    &Battle::repB_revolver,
+    &Battle::repB_revolver,
+    &Battle::repB_revolver,
+    &Battle::repB_revolver,
+    &Battle::repB_revolver,
+    &Battle::repA_revolver,
+    &Battle::repS_revolver,
+    // original
+    &Battle::novice_revolver,
+    &Battle::elite_revolver,
+    &Battle::wisdom_revolver,
+    &Battle::dragoon,
+    &Battle::model_1,
+
+    // xxxx30    Goblet      ゴブレット
+    // replica
+    &Battle::repB_goblet,
+    &Battle::repB_goblet,
+    &Battle::repB_goblet,
+    &Battle::repB_goblet,
+    &Battle::repB_goblet,
+    &Battle::repA_goblet,
+    &Battle::repS_goblet,
+    // original
+    &Battle::novice_goblet,
+    &Battle::elite_goblet,
+    &Battle::wisdom_goblet,
+    &Battle::goblet_of_kowakamai,
+    &Battle::holy_grail,
+
+    // xxxx31    Boots       ブーツ
+    // replica
+    &Battle::repB_boots,
+    &Battle::repB_boots,
+    &Battle::repB_boots,
+    &Battle::repB_boots,
+    &Battle::repB_boots,
+    &Battle::repA_boots,
+    &Battle::repS_boots,
+    // original
+    &Battle::novice_boots,
+    &Battle::elite_boots,
+    &Battle::brave_boots,
+    &Battle::great_western_boots,
+    &Battle::kobold_boots,
+
+    
 
     // アートエディットスキル
         
@@ -610,7 +676,7 @@ void Battle::novice_quill( Position p ) {
 void Battle::elite_quill( Position p ) {
     healSkill( p, HP, LOW, ALLY, 40, 50 );
 }
-void Battle::wizdom_quill( Position p ) {
+void Battle::wisdom_quill( Position p ) {
     healSkill( p, HP, LOW, ALLY, 50, 60 );
 }
 void Battle::master_musicians_quill( Position p ) {
@@ -745,7 +811,7 @@ void Battle::novice_book( Position p ) {
 void Battle::elite_book( Position p ) {
     damageSkill( p, AllEnemy, 30, 35 , INT, ACTIVE_DAMAGE );
 }
-void Battle::wizdom_book( Position p ) {
+void Battle::wisdom_book( Position p ) {
     damageSkill( p, AllEnemy, 35, 40 , INT, ACTIVE_DAMAGE );
 }
 void Battle::crime_and_punishment( Position p ) {
@@ -775,7 +841,7 @@ void Battle::novice_ring( Position p ) {
 void Battle::elite_ring( Position p ) {
     healSkill( p, HP, LOW, ALLY, 40, 50 );
 }
-void Battle::wizdom_ring( Position p ) {
+void Battle::wisdom_ring( Position p ) {
     healSkill( p, HP, LOW, ALLY, 50, 60 );
 }
 void Battle::mysterious_stone_glow( Position p ) {
@@ -1001,7 +1067,7 @@ void Battle::elite_scrolls( Position p ) {
     damageSkill( p, AllEnemy, 20, 25, INT, ACTIVE_DAMAGE );
     statusAilmentSkill( p, AGI, HIGH, ENEMY, Poison );
 }
-void Battle::wizdom_scrolls( Position p ) {
+void Battle::wisdom_scrolls( Position p ) {
     damageSkill( p, AllEnemy, 25, 30, INT, ACTIVE_DAMAGE );
     statusAilmentSkill( p, AGI, HIGH, ENEMY, Poison );
 }
@@ -1039,7 +1105,7 @@ void Battle::elite_necklace( Position p ) {
     healSkill( p, HP, LOW, ALLY, 10, 15 );
     healSkill( p, OneSelf, 10, 15 );
 }
-void Battle::wizdom_necklace( Position p ) {
+void Battle::wisdom_necklace( Position p ) {
     healSkill( p, HP, LOW, ALLY, 10, 20 );
     healSkill( p, OneSelf, 10, 20 );
 }
@@ -1120,7 +1186,7 @@ void Battle::elite_turtle( Position p ) {
     changeAttrSkill( p, OneSelf, INT, INT, 4, 9, BUFF );
     healSkill( p, OneSelf, 15 );
 }
-void Battle::wizdom_turtle( Position p ) {
+void Battle::wisdom_turtle( Position p ) {
     changeAttrSkill( p, OneSelf, PHY, PHY, 5, 10, BUFF );
     changeAttrSkill( p, OneSelf, INT, INT, 5, 10, BUFF );
     healSkill( p, OneSelf, 20 );
@@ -1239,7 +1305,7 @@ void Battle::elite_dragon( Position p ) {
     damageSkill( p, AllEnemy, 15, 20, INT, ACTIVE_DAMAGE );
     changeAttrSkill( p, AllEnemy, INT, INT, 7, DEBUFF );
 }
-void Battle::wizdom_dragon( Position p ) {
+void Battle::wisdom_dragon( Position p ) {
     damageSkill( p, AllEnemy, 20, 25, INT, ACTIVE_DAMAGE );
     changeAttrSkill( p, AllEnemy, INT, INT, 8, DEBUFF );
 }
@@ -1347,7 +1413,7 @@ void Battle::elite_monkey( Position p ) {
     damageSkill( p, HP, LOW, ENEMY, 15, 20, INT, ACTIVE_DAMAGE );
     statusAilmentSkill( p, HP, LOW, ENEMY, Sleep );
 }
-void Battle::wizdom_monkey( Position p ) {
+void Battle::wisdom_monkey( Position p ) {
     damageSkill( p, HP, LOW, ENEMY, 20, 25, INT, ACTIVE_DAMAGE );
     statusAilmentSkill( p, HP, LOW, ENEMY, Sleep );
 }
@@ -1383,7 +1449,7 @@ void Battle::elite_snake( Position p ) {
     changeAttrSkill( p, HP, LOW, ALLY, PHY, INT, 9, 19, BUFF );
     healSkill( p, HP, LOW, ALLY, 14, 34 );
 }
-void Battle::wizdom_snake( Position p ) {
+void Battle::wisdom_snake( Position p ) {
     changeAttrSkill( p, HP, LOW, ALLY, PHY, INT, 11, 21, BUFF );
     healSkill( p, HP, LOW, ALLY, 16, 36 );
 }
@@ -1418,7 +1484,7 @@ void Battle::elite_dog( Position p ) {
     damageSkill( p, INT, HIGH, ENEMY, 35, 45, INT, ACTIVE_DAMAGE );
     changeAttrSkill( p, INT, HIGH, ENEMY, INT, INT, 7, DEBUFF );
 }
-void Battle::wizdom_dog( Position p ) {
+void Battle::wisdom_dog( Position p ) {
     damageSkill( p, INT, HIGH, ENEMY, 40, 50, INT, ACTIVE_DAMAGE );
     changeAttrSkill( p, INT, HIGH, ENEMY, INT, INT, 8, DEBUFF );
 }
@@ -1430,6 +1496,290 @@ void Battle::shippei_taro( Position p ) {
     damageSkill( p, INT, HIGH, ENEMY, 50, 60, INT, ACTIVE_DAMAGE );
     changeAttrSkill( p, INT, HIGH, ENEMY, INT, INT, 10, DEBUFF );
 }
+
+
+// xxxx28    Rapier      レイピア
+// replica
+void Battle::repB_rapier( Position p ) {
+}
+void Battle::repA_rapier( Position p ) {
+
+}
+void Battle::repS_rapier( Position p ) {
+
+}
+// original
+void Battle::novice_rapier( Position p ) {
+    damageSkill( p, FrontEnemy, 40, 50, PHY, ACTIVE_DAMAGE );
+
+    int debuff = calcDebuff( p, PHY );
+    if ( debuff == 0 ) { return; }
+
+    int rate = Dice( 46, 50 );
+    int damage = debuff * rate / 100;
+    Position p_attacked = searchFrontHero( oppositeSide(p.side) );
+    if ( !isValidPosition( p_attacked ) ) { return; }
+    giveDamage( p_attacked, damage, ACTIVE_DAMAGE );
+}
+void Battle::elite_rapier( Position p ) {
+    damageSkill( p, FrontEnemy, 45, 55, PHY, ACTIVE_DAMAGE );
+
+    int debuff = calcDebuff( p, PHY );
+    if ( debuff == 0 ) { return; }
+
+    int rate = Dice( 48, 52 );
+    int damage = debuff * rate / 100;
+    Position p_attacked = searchFrontHero( oppositeSide(p.side) );
+    if ( !isValidPosition( p_attacked ) ) { return; }
+    giveDamage( p_attacked, damage, ACTIVE_DAMAGE );
+}
+void Battle::brave_rapier( Position p ) {
+    damageSkill( p, FrontEnemy, 50, 60, PHY, ACTIVE_DAMAGE );
+
+    int debuff = calcDebuff( p, PHY );
+    if ( debuff == 0 ) { return; }
+
+    int rate = Dice( 50, 54 );
+    int damage = debuff * rate / 100;
+    Position p_attacked = searchFrontHero( oppositeSide(p.side) );
+    if ( !isValidPosition( p_attacked ) ) { return; }
+    giveDamage( p_attacked, damage, ACTIVE_DAMAGE );
+}
+void Battle::espada_ropera( Position p ) {
+    damageSkill( p, FrontEnemy, 55, 65, PHY, ACTIVE_DAMAGE );
+
+    int debuff = calcDebuff( p, PHY );
+    if ( debuff == 0 ) { return; }
+
+    int rate = Dice( 52, 56 );
+    int damage = debuff * rate / 100;
+    Position p_attacked = searchFrontHero( oppositeSide(p.side) );
+    if ( !isValidPosition( p_attacked ) ) { return; }
+    giveDamage( p_attacked, damage, ACTIVE_DAMAGE );
+}
+void Battle::flamberge( Position p ) {
+    damageSkill( p, FrontEnemy, 60, 70, PHY, ACTIVE_DAMAGE );
+
+    int debuff = calcDebuff( p, PHY );
+    if ( debuff == 0 ) { return; }
+
+    int rate = Dice( 54, 58 );
+    int damage = debuff * rate / 100;
+    Position p_attacked = searchFrontHero( oppositeSide(p.side) );
+    if ( !isValidPosition( p_attacked ) ) { return; }
+    giveDamage( p_attacked, damage, ACTIVE_DAMAGE );
+}
+
+// xxxx29    Revolver    リボルバー
+// replica
+void Battle::repB_revolver( Position p ) {
+
+}
+void Battle::repA_revolver( Position p ) {
+
+}
+void Battle::repS_revolver( Position p ) {
+
+}
+// original
+void Battle::novice_revolver( Position p ) {
+    damageSkill( p, FrontEnemy, 35, 45, INT, ACTIVE_DAMAGE );
+
+    Position p_attacked = searchFrontHero( oppositeSide(p.side) );
+    if ( !isValidPosition( p_attacked ) ) { return; }
+    int debuff = calcDebuff( p_attacked, INT );
+    if ( debuff == 0 ) { return; }
+
+    int rate = Dice( 7, 9 );
+    int damage = debuff * rate / 100;
+
+    giveDamage( p_attacked, damage, ACTIVE_DAMAGE );
+}
+void Battle::elite_revolver( Position p ) {
+    damageSkill( p, FrontEnemy, 40, 50, INT, ACTIVE_DAMAGE );
+
+    Position p_attacked = searchFrontHero( oppositeSide(p.side) );
+    if ( !isValidPosition( p_attacked ) ) { return; }
+    int debuff = calcDebuff( p_attacked, INT );
+    if ( debuff == 0 ) { return; }
+
+    int rate = Dice( 8, 10 );
+    int damage = debuff * rate / 100;
+
+    giveDamage( p_attacked, damage, ACTIVE_DAMAGE );
+}
+void Battle::wisdom_revolver( Position p ) {
+    damageSkill( p, FrontEnemy, 45, 55, INT, ACTIVE_DAMAGE );
+
+    Position p_attacked = searchFrontHero( oppositeSide(p.side) );
+    if ( !isValidPosition( p_attacked ) ) { return; }
+    int debuff = calcDebuff( p_attacked, INT );
+    if ( debuff == 0 ) { return; }
+
+    int rate = Dice( 9, 11 );
+    int damage = debuff * rate / 100;
+
+    giveDamage( p_attacked, damage, ACTIVE_DAMAGE );
+}
+void Battle::dragoon( Position p ) {
+    damageSkill( p, FrontEnemy, 50, 60, INT, ACTIVE_DAMAGE );
+
+    Position p_attacked = searchFrontHero( oppositeSide(p.side) );
+    if ( !isValidPosition( p_attacked ) ) { return; }
+    int debuff = calcDebuff( p_attacked, INT );
+    if ( debuff == 0 ) { return; }
+
+    int rate = Dice( 10, 12 );
+    int damage = debuff * rate / 100;
+
+    giveDamage( p_attacked, damage, ACTIVE_DAMAGE );
+}
+void Battle::model_1( Position p ) {
+    damageSkill( p, FrontEnemy, 55, 65, INT, ACTIVE_DAMAGE );
+
+    Position p_attacked = searchFrontHero( oppositeSide(p.side) );
+    if ( !isValidPosition( p_attacked ) ) { return; }
+    int debuff = calcDebuff( p_attacked, INT );
+    if ( debuff == 0 ) { return; }
+
+    int rate = Dice( 11, 13 );
+    int damage = debuff * rate / 100;
+
+    giveDamage( p_attacked, damage, ACTIVE_DAMAGE );
+}
+
+// xxxx30    Goblet      ゴブレット
+// replica
+void Battle::repB_goblet( Position p ) {
+
+}
+void Battle::repA_goblet( Position p ) {
+
+}
+void Battle::repS_goblet( Position p ) {
+
+}
+// original
+void Battle::novice_goblet( Position p ) {
+    healSkill( p, HP, LOW, ALLY, 30, 40 );
+
+    vector<Attr> va = { PHY, INT };
+
+    for ( Attr& a : va ) {
+    for ( Order o = Front; o < Order_End; o++ ) {
+        Position p_target = { p.side, o };
+        if ( isDead( p_target ) ) { continue; }
+        int debuff = calcDebuff( p_target, a );
+        int rate = 17;
+        int buff = debuff * rate / 100;
+
+        giveBuff( p_target, a, buff );
+    }
+    }
+}
+void Battle::elite_goblet( Position p ) {
+    healSkill( p, HP, LOW, ALLY, 35, 45 );
+
+    vector<Attr> va = { PHY, INT };
+
+    for ( Attr& a : va ) {
+    for ( Order o = Front; o < Order_End; o++ ) {
+        Position p_target = { p.side, o };
+        if ( isDead( p_target ) ) { continue; }
+        int debuff = calcDebuff( p_target, a );
+        int rate = 19;
+        int buff = debuff * rate / 100;
+
+        giveBuff( p_target, a, buff );
+    }
+    }
+}
+void Battle::wisdom_goblet( Position p ) {
+    healSkill( p, HP, LOW, ALLY, 40, 50 );
+
+    vector<Attr> va = { PHY, INT };
+
+    for ( Attr& a : va ) {
+    for ( Order o = Front; o < Order_End; o++ ) {
+        Position p_target = { p.side, o };
+        if ( isDead( p_target ) ) { continue; }
+        int debuff = calcDebuff( p_target, a );
+        int rate = 21;
+        int buff = debuff * rate / 100;
+
+        giveBuff( p_target, a, buff );
+    }
+    }
+}
+void Battle::goblet_of_kowakamai( Position p ) {
+    healSkill( p, HP, LOW, ALLY, 45, 55 );
+
+    vector<Attr> va = { PHY, INT };
+
+    for ( Attr& a : va ) {
+    for ( Order o = Front; o < Order_End; o++ ) {
+        Position p_target = { p.side, o };
+        if ( isDead( p_target ) ) { continue; }
+        int debuff = calcDebuff( p_target, a );
+        int rate = 23;
+        int buff = debuff * rate / 100;
+
+        giveBuff( p_target, a, buff );
+    }
+    }
+}
+void Battle::holy_grail( Position p ) {
+    healSkill( p, HP, LOW, ALLY, 50, 60 );
+
+    vector<Attr> va = { PHY, INT };
+
+    for ( Attr& a : va ) {
+    for ( Order o = Front; o < Order_End; o++ ) {
+        Position p_target = { p.side, o };
+        if ( isDead( p_target ) ) { continue; }
+        int debuff = calcDebuff( p_target, a );
+        int rate = 25;
+        int buff = debuff * rate / 100;
+
+        giveBuff( p_target, a, buff );
+    }
+    }
+}
+
+// xxxx31    Boots       ブーツ
+// replica
+void Battle::repB_boots( Position p ) {
+    
+}
+void Battle::repA_boots( Position p ) {
+
+}
+void Battle::repS_boots( Position p ) {
+
+}
+// original
+void Battle::novice_boots( Position p ) {
+    healSkill( p, OneSelf, 15, 20 );
+    changeAttrSkill( p, OneSelf, AGI, AGI, 6, BUFF );
+}
+void Battle::elite_boots( Position p ) {
+    healSkill( p, OneSelf, 20, 25 );
+    changeAttrSkill( p, OneSelf, AGI, AGI, 7, BUFF );
+}
+void Battle::brave_boots( Position p ) {
+    healSkill( p, OneSelf, 25, 35 );
+    changeAttrSkill( p, OneSelf, AGI, AGI, 8, BUFF );
+}
+void Battle::great_western_boots( Position p ) {
+    healSkill( p, OneSelf, 30, 35 );
+    changeAttrSkill( p, OneSelf, AGI, AGI, 9, BUFF );
+}
+void Battle::kobold_boots( Position p ) {
+    healSkill( p, OneSelf, 35, 40 );
+    changeAttrSkill( p, OneSelf, AGI, AGI, 10, BUFF );
+}
+
+
 
 
 // xxxxxx0   休む

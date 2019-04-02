@@ -200,6 +200,104 @@ int main() {
 
 #endif
 
+
+// デバッグ用
+// 新エクステンションが出たときに、全ヒーローの中からランダムに選んでバトルを繰り返す
+#if 0
+
+int main() {
+
+    init();
+
+    /* -------------------- Hero　の設定 -------------------- */
+
+
+    int attr[ATTR_END] = { 300, 200, 200, 100 };
+
+    int r[5] = { NOVICE, UNCOMMON, RARE, EPIC, LEGENDARY };
+    int rep[3] = { REP_B, REP_A, REP_S };
+
+    vector<ID> v_hero_id;
+    for ( int i = 0; i < 5; i++ ) {
+        for ( int j = 1; j <= 100; j++ ) {
+            ID id = r[i] + j;
+            if ( convertIDToHeroIndex(id) == 0 ) { break; }
+            v_hero_id.push_back(id);
+        }
+    }
+
+    vector<ACTIVE_SKILL_ID> v_extension_id;
+    vector<ACTIVE_SKILL_ID> v_art_edit_skill_id;
+
+    
+    // エクステンションのタイプを選ぶ
+    int type = BOOTS;
+    int id;
+    for ( int i = 0; i < 5; i++ ) {
+        id = r[i] + type;
+        if ( isValidActiveSkillID( id ) ) {
+            v_extension_id.push_back( id );
+        }
+    }
+    for ( int j = 0; j < 3; j++ ) {
+        id = rep[j] + type;
+        if ( isValidActiveSkillID( id ) ) {
+            v_extension_id.push_back( id );
+        }
+    }
+    
+    for ( int i = 0; i < n_art_edit_skill-1; i++ ) {
+        v_art_edit_skill_id.push_back( ART_EDIT_SKILL + i );
+    }
+
+
+
+    /* -------------------- Battle　の設定 -------------------- */
+
+
+    
+    int n_battle = 0;
+    cin >> n_battle;
+
+
+    
+    Battle battle;
+
+    battle.fileOpen();
+
+    for ( int i = 0; i < n_battle; i++ ) {
+
+
+        for ( Side s = Attack; s < Side_End; s++ ) {
+        for ( Order o = Front; o < Order_End; o++ ) {
+            Position p = { s, o };
+            int id = v_hero_id[ Dice(0,v_hero_id.size()-1) ];
+            ACTIVE_SKILL_ID asi[3];
+            asi[0] = v_extension_id[ Dice( 0, v_extension_id.size()-1 ) ];
+            asi[2] = v_extension_id[ Dice( 0, v_extension_id.size()-1 ) ];
+            asi[1] = v_art_edit_skill_id[ Dice( 0, v_art_edit_skill_id.size()-1 ) ];
+            battle.setHero( p, id, attr, asi );
+        }
+        }
+
+        for ( int j = 0; j < 10; j++ ) {
+            battle.startBattle();
+        
+            battle.resetBattle();
+        }
+
+        if ( i == 0 ) { battle.fileClose(); }
+        
+    }
+
+    return 0;
+}
+
+
+
+#endif
+
+
 // デバッグ用
 // 全ヒーロー、全エクステンション、全アートエディットスキルの中からランダムに選んで編成し、戦闘を繰り返す
 #if 0
@@ -289,6 +387,7 @@ int main() {
 
 
 #endif
+
 
 
 

@@ -224,6 +224,10 @@ xxxx24    Elephant    エレファント
 xxxx25    Monkey      モンキー
 xxxx26    Snake       スネーク
 xxxx27    Dog         ドッグ
+xxxx28    Rapier      レイピア
+xxxx29    Revolver    リボルバー
+xxxx30    Goblet      ゴブレット
+xxxx31    Boots       ブーツ
 */
 
 
@@ -259,6 +263,10 @@ void initExtensionNameToID() {
     ExtensionType_name_to_ID["モンキー"] = static_cast<ACTIVE_SKILL_ID>(MONKEY);
     ExtensionType_name_to_ID["スネーク"] = static_cast<ACTIVE_SKILL_ID>(SNAKE);
     ExtensionType_name_to_ID["ドッグ"] = static_cast<ACTIVE_SKILL_ID>(DOG);
+    ExtensionType_name_to_ID["レイピア"] = static_cast<ACTIVE_SKILL_ID>(RAPIER);
+    ExtensionType_name_to_ID["リボルバー"] = static_cast<ACTIVE_SKILL_ID>(REVOLVER);
+    ExtensionType_name_to_ID["ゴブレット"] = static_cast<ACTIVE_SKILL_ID>(GOBLET);
+    ExtensionType_name_to_ID["ブーツ"] = static_cast<ACTIVE_SKILL_ID>(BOOTS);
 
     extension_replica_rarity_to_ID["RepS"] = REP_S;
     extension_replica_rarity_to_ID["RepA"] = REP_A;
@@ -267,20 +275,6 @@ void initExtensionNameToID() {
     extension_replica_rarity_to_ID["RepD"] = REP_D;
     extension_replica_rarity_to_ID["RepE"] = REP_E;
     extension_replica_rarity_to_ID["RepF"] = REP_F;
-
-    // xxxxx1    blade       ブレード
-    extension_name_to_ID["ノービスブレード"] = COMMON + static_cast<int>(BLADE);
-    extension_name_to_ID["エリートブレード"] = UNCOMMON + static_cast<int>(BLADE);
-    extension_name_to_ID["ブレイブブレード"] = RARE + static_cast<int>(BLADE);
-    extension_name_to_ID["インペリアルブレード"] = EPIC + static_cast<int>(BLADE);
-    extension_name_to_ID["MCHブレード"] = LEGENDARY + static_cast<int>(BLADE);
-    // xxxxx2    musket      マスケット
-    extension_name_to_ID["ノービスマスケット"] = COMMON + static_cast<int>(BLADE);
-    extension_name_to_ID["エリートマスケット"] = UNCOMMON + static_cast<int>(BLADE);
-    extension_name_to_ID["ブレイブマスケット"] = RARE + static_cast<int>(BLADE);
-    extension_name_to_ID["三銃士のマスケット"] = EPIC + static_cast<int>(BLADE);
-    extension_name_to_ID["グランダルメ"] = LEGENDARY + static_cast<int>(BLADE);
-
 
     extension_name_to_ID["休む"] = ART_EDIT_SKILL + 0;
     extension_name_to_ID["レッドストライク"] = ART_EDIT_SKILL + 1;
@@ -477,6 +471,31 @@ string extension_name_array[ n_extension_type * n_original_rank + 1 + n_art_edit
     "ウィズダムドッグ",
     "モロッサス",
     "しっぺい太郎",
+    // xxxx28    Rapier      レイピア
+    "レイピア",
+    "エリートレイピア",
+    "ブレイブレイピア",
+    "エスパダ・ロペラ",
+    "フランベルジェ",
+    // xxxx29    Revolver    リボルバー
+    "リボルバー",
+    "エリートリボルバー",
+    "ウィズダムリボルバー",
+    "ドラグーン",
+    "モデル１",
+    // xxxx30    Goblet      ゴブレット
+    "ゴブレット",
+    "エリートゴブレット",
+    "ウィズダムゴブレット",
+    "幸若舞の盃",
+    "聖杯",
+    // xxxx31    Boots       ブーツ
+    "ブーツ",
+    "エリートブーツ",
+    "ブレイブブーツ",
+    "大西部のブーツ",
+    "コボルドのブーツ",
+
 
     // アートエディットスキル    
     "休む",
@@ -540,6 +559,10 @@ string extension_type_name_array[ n_extension_type + 1 ] = {
     "モンキー",
     "スネーク",
     "ドッグ",
+    "レイピア",
+    "リボルバー",
+    "ゴブレット",
+    "ブーツ",
 };
 
 string IDToReplicaRankName[n_replica_rank+1] = {
@@ -555,26 +578,6 @@ ActiveSkillType IDToActiveSkillType( ACTIVE_SKILL_ID id ) {
     else { return ELSE; }
 }
 
-
-
-ACTIVE_SKILL_ID convertExtensionNameToID( string s ) {
-
-    ACTIVE_SKILL_ID ret;
-
-    // replica
-    if ( s.substr( s.length()-4, 3 ) == "Rep" ) {
-        vector<string> vs;
-        vs = split( s, '.' );
-        assert( vs.size() == 2 );
-        ret = ExtensionType_name_to_ID[ vs[0] ] + extension_replica_rarity_to_ID[ vs[1] ];        
-    }
-    //original
-    else {
-        ret = extension_name_to_ID[s];
-    }
-
-    return ret;
-}
 
 
 string convertIDToExtensionName( ACTIVE_SKILL_ID id ) {

@@ -230,20 +230,14 @@ void Battle::poisonDamage( Position p ) {
 // p にいるヒーローが混乱時に、ランダムなヒーローに対してPHY100%ダメージ
 void Battle::confusionRandomAttack( Position p ) {
 
-    // damageSkill( p, Random, 100, PHY, NOT_ACTIVE_DAMAGE );
-
     Position p_attacked = randomHero();
 
     Hero* hero_attack = &heroes[p.side][p.order];
     Hero* hero_attacked = &heroes[p_attacked.side][p_attacked.order];
 
     int damage = calcDamage( hero_attack->attr_battle[PHY], 100, hero_attacked->attr_battle[PHY] );
+    if ( print_battle_log ) { ofs_battle_log << "混乱によるランダム攻撃  ";  }
     giveDamage( p_attacked, damage, ACTIVE_DAMAGE );
-
-    if ( print_battle_log ) { ofs_battle_log << "混乱によるランダム攻撃 →   ";  }
-
-    printPositionHero( p_attacked );
-    printChangeAttributeValue( HP, damage, false );
 
 }
 
