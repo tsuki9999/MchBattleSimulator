@@ -1489,7 +1489,7 @@ void Battle::wisdom_dog( Position p ) {
     changeAttrSkill( p, INT, HIGH, ENEMY, INT, INT, 8, DEBUFF );
 }
 void Battle::molossus( Position p ) {
-    damageSkill( p, INT, HIGH, ENEMY, 45, 50, INT, ACTIVE_DAMAGE );
+    damageSkill( p, INT, HIGH, ENEMY, 45, 55, INT, ACTIVE_DAMAGE );
     changeAttrSkill( p, INT, HIGH, ENEMY, INT, INT, 9, DEBUFF );
 }
 void Battle::shippei_taro( Position p ) {
@@ -1767,7 +1767,7 @@ void Battle::elite_boots( Position p ) {
     changeAttrSkill( p, OneSelf, AGI, AGI, 7, BUFF );
 }
 void Battle::brave_boots( Position p ) {
-    healSkill( p, OneSelf, 25, 35 );
+    healSkill( p, OneSelf, 25, 30 );
     changeAttrSkill( p, OneSelf, AGI, AGI, 8, BUFF );
 }
 void Battle::great_western_boots( Position p ) {
