@@ -522,50 +522,49 @@ const ExtensionAttr = {
     3028: { HP:0,PHY:58,INT:0,AGI:57 },
     4028: { HP:0,PHY:67,INT:0,AGI:66 },
     5028: { HP:0,PHY:76,INT:0,AGI:75 },
-    10028: { HP:0,PHY:0,INT:0,AGI:0 },
-    20028: { HP:0,PHY:0,INT:0,AGI:0 },
-    30028: { HP:0,PHY:0,INT:0,AGI:0 },
-    40028: { HP:0,PHY:0,INT:0,AGI:0 },
-    50028: { HP:0,PHY:0,INT:0,AGI:0 },
-    60028: { HP:0,PHY:0,INT:0,AGI:0 },
-    70028: { HP:0,PHY:0,INT:0,AGI:0 },
+    10028: { HP:0,PHY:16,INT:0,AGI:16 },
+    20028: { HP:0,PHY:20,INT:0,AGI:20 },
+    30028: { HP:0,PHY:24,INT:0,AGI:24 },
+    40028: { HP:0,PHY:30,INT:0,AGI:30 },
+    50028: { HP:0,PHY:34,INT:0,AGI:34 },
+    60028: { HP:0,PHY:42,INT:0,AGI:42 },
+    70028: { HP:0,PHY:52,INT:0,AGI:52 },
     1029: { HP:0,PHY:0,INT:40,AGI:39 },
     2029: { HP:0,PHY:0,INT:49,AGI:48 },
     3029: { HP:0,PHY:0,INT:58,AGI:57 },
     4029: { HP:0,PHY:0,INT:67,AGI:66 },
     5029: { HP:0,PHY:0,INT:76,AGI:75 },
-    10029: { HP:0,PHY:0,INT:0,AGI:0 },
-    20029: { HP:0,PHY:0,INT:0,AGI:0 },
-    30029: { HP:0,PHY:0,INT:0,AGI:0 },
-    40029: { HP:0,PHY:0,INT:0,AGI:0 },
-    50029: { HP:0,PHY:0,INT:0,AGI:0 },
-    60029: { HP:0,PHY:0,INT:0,AGI:0 },
-    70029: { HP:0,PHY:0,INT:0,AGI:0 },
+    10029: { HP:0,PHY:0,INT:16,AGI:16 },
+    20029: { HP:0,PHY:0,INT:20,AGI:20 },
+    30029: { HP:0,PHY:0,INT:24,AGI:24 },
+    40029: { HP:0,PHY:0,INT:30,AGI:30 },
+    50029: { HP:0,PHY:0,INT:34,AGI:34 },
+    60029: { HP:0,PHY:0,INT:42,AGI:42 },
+    70029: { HP:0,PHY:0,INT:52,AGI:52 },
     1030: { HP:117,PHY:0,INT:40,AGI:0 },
     2030: { HP:147,PHY:0,INT:48,AGI:0 },
     3030: { HP:171,PHY:0,INT:58,AGI:0 },
     4030: { HP:201,PHY:0,INT:66,AGI:0 },
     5030: { HP:225,PHY:0,INT:76,AGI:0 },
-    10030: { HP:0,PHY:0,INT:0,AGI:0 },
-    20030: { HP:0,PHY:0,INT:0,AGI:0 },
-    30030: { HP:0,PHY:0,INT:0,AGI:0 },
-    40030: { HP:0,PHY:0,INT:0,AGI:0 },
-    50030: { HP:0,PHY:0,INT:0,AGI:0 },
-    60030: { HP:0,PHY:0,INT:0,AGI:0 },
-    70030: { HP:0,PHY:0,INT:0,AGI:0 },
+    10030: { HP:48,PHY:0,INT:16,AGI:0 },
+    20030: { HP:60,PHY:0,INT:20,AGI:0 },
+    30030: { HP:72,PHY:0,INT:24,AGI:0 },
+    40030: { HP:90,PHY:0,INT:30,AGI:0 },
+    50030: { HP:102,PHY:0,INT:34,AGI:0 },
+    60030: { HP:126,PHY:0,INT:42,AGI:0 },
+    70030: { HP:156,PHY:0,INT:52,AGI:0 },
     1031: { HP:177,PHY:0,INT:0,AGI:20 },
     2031: { HP:219,PHY:0,INT:0,AGI:24 },
     3031: { HP:258,PHY:0,INT:0,AGI:29 },
     4031: { HP:291,PHY:0,INT:0,AGI:32 },
     5031: { HP:339,PHY:0,INT:0,AGI:38 },
-    10031: { HP:0,PHY:0,INT:0,AGI:0 },
-    20031: { HP:0,PHY:0,INT:0,AGI:0 },
-    30031: { HP:0,PHY:0,INT:0,AGI:0 },
-    40031: { HP:0,PHY:0,INT:0,AGI:0 },
-    50031: { HP:0,PHY:0,INT:0,AGI:0 },
-    60031: { HP:0,PHY:0,INT:0,AGI:0 },
-    70031: { HP:0,PHY:0,INT:0,AGI:0 },
-    
+    10031: { HP:72,PHY:0,INT:0,AGI:8 },
+    20031: { HP:90,PHY:0,INT:0,AGI:10 },
+    30031: { HP:108,PHY:0,INT:0,AGI:12 },
+    40031: { HP:135,PHY:0,INT:0,AGI:15 },
+    50031: { HP:153,PHY:0,INT:0,AGI:17 },
+    60031: { HP:189,PHY:0,INT:0,AGI:21 },
+    70031: { HP:234,PHY:0,INT:0,AGI:26 },
 
 };
 
@@ -857,13 +856,6 @@ $(document).ready( function(){
                 // ドッグのRepS
                 if ( type == Dog && rarity >= RepA ) {
                     $(this).remove();
-                }
-
-                // ノード1.3のレプリカ
-                if ( type == Rapier || type == Revolver || type == Goblet || type == Boots ) {
-                    if ( rarity >= RepF ) {
-                        $(this).remove();
-                    }
                 }
 
                 // 存在しない
