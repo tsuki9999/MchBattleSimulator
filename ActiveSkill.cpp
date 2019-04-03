@@ -1501,12 +1501,40 @@ void Battle::shippei_taro( Position p ) {
 // xxxx28    Rapier      レイピア
 // replica
 void Battle::repB_rapier( Position p ) {
+    damageSkill( p, FrontEnemy, 45, PHY, ACTIVE_DAMAGE );
+
+    int debuff = calcDebuff( p, PHY );
+    if ( debuff == 0 ) { return; }
+
+    int rate = 48;
+    int damage = debuff * rate / 100;
+    Position p_attacked = searchFrontHero( oppositeSide(p.side) );
+    if ( !isValidPosition( p_attacked ) ) { return; }
+    giveDamage( p_attacked, damage, ACTIVE_DAMAGE );
 }
 void Battle::repA_rapier( Position p ) {
+    damageSkill( p, FrontEnemy, 40, 50, PHY, ACTIVE_DAMAGE );
 
+    int debuff = calcDebuff( p, PHY );
+    if ( debuff == 0 ) { return; }
+
+    int rate = Dice( 46, 50 );
+    int damage = debuff * rate / 100;
+    Position p_attacked = searchFrontHero( oppositeSide(p.side) );
+    if ( !isValidPosition( p_attacked ) ) { return; }
+    giveDamage( p_attacked, damage, ACTIVE_DAMAGE );
 }
 void Battle::repS_rapier( Position p ) {
+    damageSkill( p, FrontEnemy, 45, 55, PHY, ACTIVE_DAMAGE );
 
+    int debuff = calcDebuff( p, PHY );
+    if ( debuff == 0 ) { return; }
+
+    int rate = Dice( 48, 52 );
+    int damage = debuff * rate / 100;
+    Position p_attacked = searchFrontHero( oppositeSide(p.side) );
+    if ( !isValidPosition( p_attacked ) ) { return; }
+    giveDamage( p_attacked, damage, ACTIVE_DAMAGE );
 }
 // original
 void Battle::novice_rapier( Position p ) {
@@ -1573,13 +1601,43 @@ void Battle::flamberge( Position p ) {
 // xxxx29    Revolver    リボルバー
 // replica
 void Battle::repB_revolver( Position p ) {
+    damageSkill( p, FrontEnemy, 40, INT, ACTIVE_DAMAGE );
 
+    Position p_attacked = searchFrontHero( oppositeSide(p.side) );
+    if ( !isValidPosition( p_attacked ) ) { return; }
+    int debuff = calcDebuff( p_attacked, INT );
+    if ( debuff == 0 ) { return; }
+
+    int rate = 8;
+    int damage = debuff * rate / 100;
+
+    giveDamage( p_attacked, damage, ACTIVE_DAMAGE );
 }
 void Battle::repA_revolver( Position p ) {
+    damageSkill( p, FrontEnemy, 35, 45, INT, ACTIVE_DAMAGE );
 
+    Position p_attacked = searchFrontHero( oppositeSide(p.side) );
+    if ( !isValidPosition( p_attacked ) ) { return; }
+    int debuff = calcDebuff( p_attacked, INT );
+    if ( debuff == 0 ) { return; }
+
+    int rate = Dice( 7, 9 );
+    int damage = debuff * rate / 100;
+
+    giveDamage( p_attacked, damage, ACTIVE_DAMAGE );
 }
 void Battle::repS_revolver( Position p ) {
+    damageSkill( p, FrontEnemy, 40, 50, INT, ACTIVE_DAMAGE );
 
+    Position p_attacked = searchFrontHero( oppositeSide(p.side) );
+    if ( !isValidPosition( p_attacked ) ) { return; }
+    int debuff = calcDebuff( p_attacked, INT );
+    if ( debuff == 0 ) { return; }
+
+    int rate = Dice( 8, 10 );
+    int damage = debuff * rate / 100;
+
+    giveDamage( p_attacked, damage, ACTIVE_DAMAGE );
 }
 // original
 void Battle::novice_revolver( Position p ) {
@@ -1651,13 +1709,55 @@ void Battle::model_1( Position p ) {
 // xxxx30    Goblet      ゴブレット
 // replica
 void Battle::repB_goblet( Position p ) {
+    healSkill( p, HP, LOW, ALLY, 35 );
 
+    vector<Attr> va = { PHY, INT };
+
+    for ( Attr& a : va ) {
+    for ( Order o = Front; o < Order_End; o++ ) {
+        Position p_target = { p.side, o };
+        if ( isDead( p_target ) ) { continue; }
+        int debuff = calcDebuff( p_target, a );
+        int rate = 15;
+        int buff = debuff * rate / 100;
+
+        giveBuff( p_target, a, buff );
+    }
+    }
 }
 void Battle::repA_goblet( Position p ) {
+    healSkill( p, HP, LOW, ALLY, 30, 40 );
 
+    vector<Attr> va = { PHY, INT };
+
+    for ( Attr& a : va ) {
+    for ( Order o = Front; o < Order_End; o++ ) {
+        Position p_target = { p.side, o };
+        if ( isDead( p_target ) ) { continue; }
+        int debuff = calcDebuff( p_target, a );
+        int rate = 17;
+        int buff = debuff * rate / 100;
+
+        giveBuff( p_target, a, buff );
+    }
+    }
 }
 void Battle::repS_goblet( Position p ) {
+    healSkill( p, HP, LOW, ALLY, 35, 45 );
 
+    vector<Attr> va = { PHY, INT };
+
+    for ( Attr& a : va ) {
+    for ( Order o = Front; o < Order_End; o++ ) {
+        Position p_target = { p.side, o };
+        if ( isDead( p_target ) ) { continue; }
+        int debuff = calcDebuff( p_target, a );
+        int rate = 19;
+        int buff = debuff * rate / 100;
+
+        giveBuff( p_target, a, buff );
+    }
+    }
 }
 // original
 void Battle::novice_goblet( Position p ) {
@@ -1749,13 +1849,16 @@ void Battle::holy_grail( Position p ) {
 // xxxx31    Boots       ブーツ
 // replica
 void Battle::repB_boots( Position p ) {
-    
+    healSkill( p, OneSelf, 15 );
+    changeAttrSkill( p, OneSelf, AGI, AGI, 5, BUFF );
 }
 void Battle::repA_boots( Position p ) {
-
+    healSkill( p, OneSelf, 15, 20 );
+    changeAttrSkill( p, OneSelf, AGI, AGI, 6, BUFF );
 }
 void Battle::repS_boots( Position p ) {
-
+    healSkill( p, OneSelf, 20, 25 );
+    changeAttrSkill( p, OneSelf, AGI, AGI, 7, BUFF );
 }
 // original
 void Battle::novice_boots( Position p ) {
