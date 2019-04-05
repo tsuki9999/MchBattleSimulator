@@ -548,8 +548,8 @@ bool Battle::Ivan_the_Terrible( Position p ) {
 bool Battle::Matsuo_Basho( Position p ) {
 	bool is_use = usePassiveInActiveByChance( p, 100 );
 	if ( is_use ) {
-        changeAttrSkill( p, FrontAlly, AGI, AGI, 3, BUFF );
         changeAttrSkill( p, OneSelf, AGI, AGI, 3, BUFF );
+        changeAttrSkill( p, FrontAlly, AGI, AGI, 3, BUFF );
     }
      return is_use;
 }
