@@ -472,7 +472,7 @@ bool Battle::Emperor_Nero( Position p ) {
 	bool is_use = usePassiveInActiveByChance( p, 100 );
 	if ( is_use ) {
         changeAttrSkill( p, Random, PHY, INT, 10, DEBUFF );
-        changeAttrSkill( p, Random, INT, INT, 10, BUFF );
+        changeAttrSkill( p, Random, INT, INT, 19, 28, BUFF );
     }
      return is_use;
 }
