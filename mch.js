@@ -69,6 +69,10 @@ const AttrToNum = {
     HP: 0, PHY: 1, INT: 2, AGI: 3
 }
 
+const HeroSkillToNum = {
+    hero: 0, skill1: 1, skill2: 2, skill3: 3
+}
+
 const SideStr = [
     "Attack","Defence"
 ];
@@ -79,6 +83,10 @@ const OrderStr = [
 
 const AttrStr = [
     "HP", "PHY", "INT", "AGI"
+];
+
+const HeroSkillStr = [
+    "hero", "skill1", "skill2", "skill3"
 ];
 
 const RarityToNum = {
@@ -581,6 +589,19 @@ let TeamAttr = {
     }
 }
 
+let TeamID = {
+    Attack: {
+        Front : { hero:0, skill1:0, skill2:0, skill3:0 },
+        Middle : { hero:0, skill1:0, skill2:0, skill3:0 },
+        Back : { hero:0, skill1:0, skill2:0, skill3:0 }
+    },
+    Defence: {
+        Front : { hero:0, skill1:0, skill2:0, skill3:0 },
+        Middle : { hero:0, skill1:0, skill2:0, skill3:0 },
+        Back : { hero:0, skill1:0, skill2:0, skill3:0 }
+    }
+}
+
 
 function searchSide( element ) {
 
@@ -593,12 +614,54 @@ function searchOrder( element ) {
     }
     return order;
 }
+function searchHeroSkill( element ) {
+    for ( let i = 0; i < HeroSkillStr.length; i++ ) {
+        if ( $(element).parents().hasClass( HeroSkillStr[i] ) ) { return HeroSkillStr[i]; }
+    }
+    return undefined;
+}
+
+
 function searchSkillNumber( element ) {
     if ( $(element).hasClass('skill1') ) { return 0; }
     else if ( $(element).hasClass('skill2') ) { return 1; }
     else if ( $(element).hasClass('skill3') ) { return 2; }
     else { return 3; }
 }
+
+
+function displayAttrAll() {
+    $(".attr_display").each( function(){
+        let str = "";
+            
+        const side = searchSide(this);
+        const order = searchOrder(this);
+        const hero_skill = searchHeroSkill(this);
+
+        const id = TeamID[side][order][hero_skill];
+
+        if ( id === 0 || id >= ArtEditSkill ) { $(this).html( "HP：0　PHY：0　INT：0　AGI：0" ); }
+        else {
+
+            if ( hero_skill == "hero" ) {
+                for ( let i = 0; i < AttrStr.length; i++ ) {
+                    str += AttrStr[i] + "：" + HeroAttr[id][ AttrStr[i] ] + "　";
+                }
+            }
+            else {
+                for ( let i = 0; i < AttrStr.length; i++ ) {
+                    str += AttrStr[i] + "：" + ExtensionAttr[id][ AttrStr[i] ] + "　";
+                }
+            }
+
+            
+            $(this).html(str);
+        }
+    });
+}
+
+
+
 
 function calcAttr( element ) {
     
@@ -610,30 +673,38 @@ function calcAttr( element ) {
         TeamAttr[side][order][AttrStr[i]] = 0;
     }
 
-    let position;
-    $(element).parents().each( function() {
-        if ( $(this).hasClass( order ) ) { position = this; return; }
-    });
-    
-    let str = "合計能力値　";
-    $(position).find('input').each( function() {
-        TeamAttr[side][order][this.className] += parseInt( $(this).val() );
-    });
+    let id;
+    for ( let i = 0; i < HeroSkillStr.length; i++ ) {
+        id = TeamID[side][order][ HeroSkillStr[i] ];
 
-    for ( let i = 0; i < AttrStr.length; i++ ) {
-        str += AttrStr[i] + ": " + String(TeamAttr[side][order][AttrStr[i]]) + "　";
-    }
-    
-    $(position).find('p').each( function() {
-        if ( $(this).hasClass('attr_sum') ) {
-            $(this).text(str)
+        for ( let j = 0; j < AttrStr.length; j++ ) {
+            if ( id > 0 && id < ArtEditSkill ) {
+                TeamAttr[side][order][AttrStr[j]] += ( HeroSkillStr[i] == "hero" ) ? HeroAttr[id][AttrStr[j]] : ExtensionAttr[id][AttrStr[j]];
+            }
         }
-    });
+    }
+
+    for ( let i = 0; i < AttrStr.length; i++ ) {      
+        let v = parseInt( $( "." + side + " ." + order + " .attr_input" + " ." + AttrStr[i] ).val() );
+        if ( !v ) { v = 0; }
+        TeamAttr[side][order][AttrStr[i]] += v;
+    }
+
+
+
+    let str = "合計能力値　";
     
+    for ( let i = 0; i < AttrStr.length; i++ ) {
+        str += AttrStr[i] + "：" + String(TeamAttr[side][order][AttrStr[i]]) + "　";
+    }
+
+
+    $( "." + side + " ." + order ).children(".attr_sum").html(str);
+
+
 }
 
 function printTextArea() {
-    // ID
 
     let str = new Array(12);
     for ( let i = 0; i < 12; i++ ) {
@@ -643,45 +714,25 @@ function printTextArea() {
     $( 'textarea' ).val(null);
 
     // ID
-    $( 'fieldset select' ).each( function() {
 
-        if ( $(this).hasClass('children') ) {
+    for ( let s = 0; s < SideStr.length; s++ ) {
+    for ( let o = 0; o < OrderStr.length; o++ ) {
+    for ( let h = 0; h < HeroSkillStr.length; h++ ) {
+        const side = SideStr[s];
+        const order = OrderStr[o];
+        const hero_skill = HeroSkillStr[h];
+        const id = TeamID[side][order][HeroSkillStr[h]];
+        const pos = ( SideToNum[side] * 3 + OrderToNum[order] )*2;
 
-            const side = searchSide( this );
-            const order = searchOrder( this );
-
-            const pos = ( SideToNum[side] * 3 + OrderToNum[order] )*2;
-
-            if ( $(this).hasClass('hero') ) {
-                const val1 = $(this.previousElementSibling).val();
-                const val2 = $(this).val();
-                // if ( !val1 || !val2 ) { $( 'textarea' ).val( $( 'textarea' ).val() + side + " " + order + " のヒーローが未設定です\n" ); }
-                if ( !val1 || !val2 ) { str[pos][0] = "未設定"; }
-                else {
-                    const rarity = RarityToNum[ val1 ];
-                    const n = parseInt( val2 );
-                    const id = rarity + n;
-                    str[pos][0] = String( id );
-                }
-                
-            }
-            else if ( $(this).hasClass('skill') ) {
-                const val1 = $(this).val();
-                const val2 = $(this.previousElementSibling).val();
-
-                const n = searchSkillNumber(this);
-                // if ( !val1 || !val2 ) { $( 'textarea' ).val( $( 'textarea' ).val() + side + " " + order + " のスキル" + String(n+1) + "が未設定です\n" ); }
-                if ( !val1 || !val2 ) { str[pos][n+1] = "未設定"; }
-                else {
-                    const id = parseInt( val1 ) + parseInt( val2 );
-                    str[pos][n+1] = String( id );
-                }                
-            }            
+        if ( id === 0 ) { str[pos][HeroSkillToNum[hero_skill]] = "未設定"; }
+        else {
+            str[pos][ HeroSkillToNum[hero_skill] ] = String( id );
         }
-        
-    });
+    }
+    }
+    }
 
-
+    // 能力値
     for ( let i = 0; i < SideStr.length; i++ ) {
     for ( let j = 0; j < OrderStr.length; j++ ) {
     for ( let k = 0; k < AttrStr.length; k++ ) {
@@ -751,9 +802,10 @@ $(document).ready( function(){
         }); 
     });
 
+    displayAttrAll();
 
     // ヒーローのレアリティを選択
-    $('.parent.hero').each(function() {
+    $('.hero .select_boxes select').each(function() {
         $(this).html( $('.parent.hero.dummy').html() );
 
         $(this).change( function(){
@@ -775,16 +827,12 @@ $(document).ready( function(){
             }
             else  { children.removeAttr('disabled'); }
 
-            // 能力値の設定をリセット
-            let flag = false;
-            $(this).parents().each( function() {
-                if ( flag ) { return; }
-                $(this).find('input').each( function() {
-                    flag = true;
-                    const name = this.className;
-                    $(this).val(AttrAllZero[name]);
-                }); 
-            });
+            const side = searchSide(this);
+            const order = searchOrder(this);
+
+            TeamID[side][order]["hero"] = 0;
+
+            displayAttrAll();
 
             calcAttr( this );
             printTextArea();
@@ -793,29 +841,25 @@ $(document).ready( function(){
     })
 
     // ヒーローを選択
-    $('.children.hero').each(function() {
+    $('.hero .children').each(function() {
+
         $(this).html( $('.children.hero.dummy').html() );
 
         // 選択肢によって能力値を設定
         $(this).change( function() {
             
+
             const rarity = RarityToNum[ $(this.previousElementSibling).val() ];
             const n = parseInt( $(this).val() );            
             const id = rarity + n;            
             const attr = HeroAttr[String(id)];
-            
-            let flag = false;
-            $(this).parents().each( function() {
-                if ( flag ) { return; }
-                $(this).find('input').each( function() {
-                    flag = true;
-                    const name = this.className;
-                    $(this).val(attr[name]);
-                }); 
-                
-            });
-            
+            const order = searchOrder(this);
+            const side = searchSide(this);
 
+            TeamID[side][order]["hero"] = id;
+
+            displayAttrAll();
+            
             calcAttr( this );
             printTextArea();
         });
@@ -823,13 +867,16 @@ $(document).ready( function(){
     })
 
     // スキルの種類を選択
-    $('.parent.skill').each(function() {
+    $('.skill .parent').each(function() {
         $(this).html( $('.parent.skill.dummy').html() );
 
         $(this).change( function(){
 
             const val1 = ( parseInt( $(this).val() ) == ArtEditSkill ) ? "art_edit" : "extension";
             const type = parseInt( $(this).val() );
+            const order = searchOrder(this);
+            const side = searchSide(this);
+            const skill = searchHeroSkill(this);
 
             const children = $(this.nextElementSibling);
             
@@ -881,16 +928,10 @@ $(document).ready( function(){
             }
             else  { children.removeAttr('disabled'); }
 
-            // 能力値の設定をリセット
-            let flag = false;
-            $(this).parents().each( function() {
-                if ( flag ) { return; }
-                $(this).find('input').each( function() {
-                    flag = true;
-                    const name = this.className;
-                    $(this).val(AttrAllZero[name]);
-                }); 
-            });
+
+            TeamID[side][order][skill] = 0;
+
+            displayAttrAll();
 
             calcAttr( this );
             printTextArea();
@@ -901,23 +942,20 @@ $(document).ready( function(){
     })
 
     // エクステンションのレアリティまたはアートエディットスキルを選択
-    $('.children.skill').each(function() {
+    $('.skill .children').each(function() {
         $(this).html( $('.children.skill.dummy').html() );
 
         // 選択肢によって能力値を設定
         $(this).change( function() {
             const id = parseInt( $(this).val() ) + parseInt( $(this.previousElementSibling).val() );
             const attr = id >= ArtEditSkill ? AttrAllZero : ExtensionAttr[String(id)];
-            
-            let flag = false;
-            $(this).parents().each( function() {
-                if ( flag ) { return; }
-                $(this).find('input').each( function() {
-                    flag = true;
-                    const name = this.className;
-                    $(this).val(attr[name]);
-                }); 
-            });
+            const order = searchOrder(this);
+            const side = searchSide(this);
+            const skill = searchHeroSkill(this);
+
+            TeamID[side][order][skill] = id;
+
+            displayAttrAll();
 
             calcAttr( this );            
             printTextArea();
