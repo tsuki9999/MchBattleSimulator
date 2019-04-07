@@ -18,8 +18,14 @@ class Battle {
     // ログ出力ファイルを開くのに成功したら true 閉じたときに false に戻す
     bool print_battle_log = true;
 
+    // 繰り返すバトル数
+    int n_battle = 0;
+
     // アクション数
     int n_action = 0;
+    
+    // s の側のチームが全滅しているかどうか
+    bool isEndGameByDead( Side s );
 
     // アクティブ時のヒーローの Position
     Position p_active = { Side_End, Order_End };
@@ -259,9 +265,21 @@ class Battle {
 
     // 戦闘開始して、200アクション経過するかどちらかのチームが全滅するまでループ
     void startBattle();
-    // s の側のチームが全滅しているかどうか
-    bool isEndGameByDead( Side s );
-    
+    // n 回のバトルを繰り返す
+    void startBattles( int n, bool out );
+
+
+    // Attack のチームが勝った数
+    int n_win = 0;
+    // Attack のチームが、負けた数
+    int n_lose = 0;
+    // 引き分けの数
+    int n_draw = 0;
+
+    int getWinNum() { return n_win; }
+    int getLoseNum() { return n_lose; }
+    int getDrawNum() { return n_draw; }
+
     // ログ出力用ファイルを開く
     // ファイルを正しく開けたら true を返す
     bool fileOpen(); 

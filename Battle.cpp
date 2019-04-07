@@ -21,6 +21,8 @@ bool Battle::fileOpen() {
     // ログ出力用ファイルを開く
     ofs_battle_log.open( s, ios::out );
 
+    print_battle_log = !( ofs_battle_log.fail() );
+
     return !( ofs_battle_log.fail() );
 }
 
@@ -46,6 +48,30 @@ void Battle::startBattle() {
     }
 
     ofs_battle_log << "Battle End" << endl;
+
+    if (!isEndGameByDead( Attack ) && isEndGameByDead( Defence ) ) { n_win++; }
+    else { n_lose++; }
+}
+
+void Battle::startBattles( int n, bool out ) {
+    n_win = n_lose = n_draw = 0;
+
+    if ( out && !fileOpen() ) { cout << "error cannnot open battle log file." << endl; return; }
+
+    for ( int i = 0; i < n; i++ ) {
+        startBattle();
+        resetBattle();
+        if ( i == 9 ) { print_battle_log = false; }
+    }
+    if ( out ) {
+        ofs_battle_log.seekp( 0, ios_base::beg );
+        ofs_battle_log << "win: " << n_win << " lose: " << n_lose << endl;
+        cout << "win: " << n_win << " lose: " << n_lose << endl;
+    }
+    
+
+    fileClose();
+
 }
 
 // 生存している全ヒーローの行動値を AGI + 100 増加

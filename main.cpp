@@ -92,28 +92,7 @@ int main() {
     int n_battle = 0;
     cin >> n_battle;
 
-
-
-    battle.fileOpen();
-
-    int win,lose;
-    win = lose = 0;
-
-    for ( int i = 0; i < n_battle; i++ ) {
-        battle.startBattle();
-
-        if ( !battle.isEndGameByDead( Attack ) && battle.isEndGameByDead( Defence ) ) { win++; }
-        else { lose++; }
-
-        battle.resetBattle();
-
-        if ( i == 9 ) { battle.fileClose(); }
-    }
-    
-    if ( n_battle < 10 ) { battle.fileClose(); }
-
-    cout << "win: " << win << " " << "lose: " << lose << endl;
-
+    battle.startBattles( n_battle, true );
 
     system("pause");
 
@@ -166,9 +145,6 @@ int main() {
 
     Battle battle;
 
-    
-    battle.fileOpen();
-
     for ( int i = 0; i < n_battle; i++ ) {
 
         // 新ヒーローのID
@@ -185,13 +161,7 @@ int main() {
         }
         }
 
-        for ( int j = 0; j < 10; j++ ) {
-            battle.startBattle();
-        
-            battle.resetBattle();
-
-            if ( i == 0 && j == 0 ) { battle.fileClose(); }            
-        }
+        battle.startBattles( 10, false );
         
     }
 
@@ -263,8 +233,6 @@ int main() {
     
     Battle battle;
 
-    battle.fileOpen();
-
     for ( int i = 0; i < n_battle; i++ ) {
 
 
@@ -279,15 +247,7 @@ int main() {
             battle.setHero( p, id, attr, asi );
         }
         }
-
-        for ( int j = 0; j < 10; j++ ) {
-            battle.startBattle();
-        
-            battle.resetBattle();
-        }
-
-        if ( i == 0 ) { battle.fileClose(); }
-        
+        battle.startBattles( 10, false );
     }
 
     return 0;
@@ -373,12 +333,8 @@ int main() {
             battle.setHero( p, id, attr, asi );
         }
         }
-
-        for ( int j = 0; j < 10; j++ ) {
-            battle.startBattle();
         
-            battle.resetBattle();
-        }
+        battle.startBattles( 10, false );
         
     }
 

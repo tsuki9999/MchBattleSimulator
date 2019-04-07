@@ -9,6 +9,7 @@
 #include <vector>
 #include <iostream>
 #include <fstream>
+#include <ostream>
 #include <utility>
 #include <string>
 #include <sstream>
