@@ -50,6 +50,7 @@ const Rapier = 28;
 const Revolver = 29;
 const Goblet = 30;
 const Boots = 31;
+const Sensu = 32;
 
 function isLandExtension( a ) {
     return Turtle <= a && a <= Dog;
@@ -576,6 +577,18 @@ const ExtensionAttr = {
     50031: { HP:153,PHY:0,INT:0,AGI:17 },
     60031: { HP:189,PHY:0,INT:0,AGI:21 },
     70031: { HP:234,PHY:0,INT:0,AGI:26 },
+    1032: { HP:60,PHY:0,INT:39,AGI:20 },
+    2032: { HP:72,PHY:0,INT:49,AGI:24 },
+    3032: { HP:87,PHY:0,INT:57,AGI:29 },
+    4032: { HP:99,PHY:0,INT:67,AGI:33 },
+    5032: { HP:114,PHY:0,INT:76,AGI:38 },
+    10032: { HP:24,PHY:0,INT:16,AGI:8 },
+    20032: { HP:30,PHY:0,INT:20,AGI:10 },
+    30032: { HP:36,PHY:0,INT:24,AGI:12 },
+    40032: { HP:45,PHY:0,INT:30,AGI:15 },
+    50032: { HP:51,PHY:0,INT:34,AGI:17 },
+    60032: { HP:0,PHY:0,INT:0,AGI:0 },
+    70032: { HP:0,PHY:0,INT:0,AGI:0 },
 
 };
 
@@ -903,6 +916,12 @@ $(document).ready( function(){
                 if ( type == CrossSpear && rarity >= RepA ) {
                     $(this).remove();
                 }
+                // センスのRepA以上
+                if ( type == Sensu && rarity >= RepA ) {
+                    $(this).remove();
+                }
+
+
                 // ドッグのRepS
                 if ( type == Dog && rarity >= RepA ) {
                     $(this).remove();
