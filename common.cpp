@@ -231,6 +231,7 @@ xxxx28    Rapier      レイピア
 xxxx29    Revolver    リボルバー
 xxxx30    Goblet      ゴブレット
 xxxx31    Boots       ブーツ
+xxxx32    Sensu       センス
 */
 
 
@@ -270,6 +271,7 @@ void initExtensionNameToID() {
     ExtensionType_name_to_ID["リボルバー"] = static_cast<ACTIVE_SKILL_ID>(REVOLVER);
     ExtensionType_name_to_ID["ゴブレット"] = static_cast<ACTIVE_SKILL_ID>(GOBLET);
     ExtensionType_name_to_ID["ブーツ"] = static_cast<ACTIVE_SKILL_ID>(BOOTS);
+    ExtensionType_name_to_ID["センス"] = static_cast<ACTIVE_SKILL_ID>(SENSU);
 
     extension_replica_rarity_to_ID["RepS"] = REP_S;
     extension_replica_rarity_to_ID["RepA"] = REP_A;
@@ -498,7 +500,12 @@ string extension_name_array[ n_extension_type * n_original_rank + 1 + n_art_edit
     "ブレイブブーツ",
     "大西部のブーツ",
     "コボルドのブーツ",
-
+    // xxxx32    Sensu       センス
+    "センス",
+    "エリートセンス",
+    "ウィズダムセンス",
+    "舞扇",
+    "白羽根太極",
 
     // アートエディットスキル    
     "休む",

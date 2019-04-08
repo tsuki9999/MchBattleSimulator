@@ -520,6 +520,22 @@ void (Battle::*functionPointerTableActive[])( Position p ) = {
     &Battle::brave_boots,
     &Battle::great_western_boots,
     &Battle::kobold_boots,
+    
+    // xxxx32    Sensu       センス
+    // replica
+    &Battle::repB_sensu,
+    &Battle::repB_sensu,
+    &Battle::repB_sensu,
+    &Battle::repB_sensu,
+    &Battle::repB_sensu,
+    &Battle::repA_sensu,
+    &Battle::repS_sensu,
+    // original
+    &Battle::novice_sensu,
+    &Battle::elite_sensu,
+    &Battle::wisdom_sensu,
+    &Battle::dance_sensu,
+    &Battle::white_feather_tai_chi,
 
     
 
@@ -1882,6 +1898,42 @@ void Battle::kobold_boots( Position p ) {
     changeAttrSkill( p, OneSelf, AGI, AGI, 10, BUFF );
 }
 
+
+// xxxx32    Sensu       センス
+// replica
+void Battle::repB_sensu( Position p ) {
+    damageSkill( p, AllEnemy, 15, INT, ACTIVE_DAMAGE );
+    healSkill( p, HP, LOW, ALLY, 10 );
+}
+void Battle::repA_sensu( Position p ) {
+    // 調査中
+}
+void Battle::repS_sensu( Position p ) {
+    // 調査中
+}
+// original
+void Battle::novice_sensu( Position p ) {
+    damageSkill( p, AllEnemy, 15, 20, INT, ACTIVE_DAMAGE );
+    healSkill( p, HP, LOW, ALLY, 10 );
+}
+void Battle::elite_sensu( Position p ) {
+    damageSkill( p, AllEnemy, 20, 25, INT, ACTIVE_DAMAGE );
+    healSkill( p, HP, LOW, ALLY, 10 );
+}
+void Battle::wisdom_sensu( Position p ) {
+    damageSkill( p, AllEnemy, 25, 30, INT, ACTIVE_DAMAGE );
+    healSkill( p, HP, LOW, ALLY, 10 );
+}
+void Battle::dance_sensu( Position p ) {
+    damageSkill( p, AllEnemy, 30, 35, INT, ACTIVE_DAMAGE );
+    healSkill( p, HP, LOW, ALLY, 10 );
+    changeAttrSkill( p, OneSelf, INT, INT, 5, BUFF );
+}
+void Battle::white_feather_tai_chi( Position p ) {
+    damageSkill( p, AllEnemy, 35, 40, INT, ACTIVE_DAMAGE );
+    healSkill( p, HP, LOW, ALLY, 10 );
+    changeAttrSkill( p, OneSelf, INT, INT, 10, BUFF );
+}
 
 
 

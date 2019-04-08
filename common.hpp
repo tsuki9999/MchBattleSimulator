@@ -92,10 +92,11 @@ xxxx28    Rapier      レイピア
 xxxx29    Revolver    リボルバー
 xxxx30    Goblet      ゴブレット
 xxxx31    Boots       ブーツ
+xxxx32    Sensu       センス
 */
 
 /* !!!!!!!!!!!!!!!!!!!!!!!!!!!!エクステンションが追加されたら変更すること!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
-const int n_extension_type = 31;
+const int n_extension_type = 32;
 
 const int n_replica_rank = 7; // F ~ S
 const int n_original_rank = 5; // common ~ legendary
@@ -110,7 +111,7 @@ const int n_art_edit_skill = 29;
 enum ExtensionType {
     DUMMY, BLADE, MUSKET, QUILL, ARMOR, HORSE, KATANA, CUTIE, BOOK, RING,
     SHIELD, AXE, ETHEREMON, YUMI, SPEAR, HALBERD, SCROLLS, NECKLACE, KABUTO, TURTLE,
-    ROOSTLER, TIGER, DRAGON, BULL, ELEPHANT, MONKEY, SNAKE, DOG, RAPIER, REVOLVER, GOBLET, BOOTS,
+    ROOSTLER, TIGER, DRAGON, BULL, ELEPHANT, MONKEY, SNAKE, DOG, RAPIER, REVOLVER, GOBLET, BOOTS, SENSU
 };
 
 enum ActiveSkillType {

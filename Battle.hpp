@@ -669,7 +669,17 @@ class Battle {
     void great_western_boots( Position p );
     void kobold_boots( Position p );
 
-    
+    // xxxx32    Sensu       センス
+    // replica
+    void repB_sensu( Position p );
+    void repA_sensu( Position p );
+    void repS_sensu( Position p );
+    // original
+    void novice_sensu( Position p );
+    void elite_sensu( Position p );
+    void wisdom_sensu( Position p );
+    void dance_sensu( Position p );
+    void white_feather_tai_chi( Position p );
 
     // アートエディットスキル
     // 英名を調べるのが面倒なので適当につける
