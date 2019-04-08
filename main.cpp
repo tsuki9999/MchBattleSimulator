@@ -148,7 +148,7 @@ int main() {
     for ( int i = 0; i < n_battle; i++ ) {
 
         // 新ヒーローのID
-        ID id = 5016;
+        ID id = 2016;
 
         for ( Side s = Attack; s < Side_End; s++ ) {
         for ( Order o = Front; o < Order_End; o++ ) {

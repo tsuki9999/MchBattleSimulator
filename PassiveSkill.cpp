@@ -53,6 +53,8 @@ bool (Battle::*functionPointerTablePassive[])( Position p ) = {
     &Battle::Tokugawa_Yoshinobu,
     // モンテスキュー
     &Battle::Montesquieu,
+    // アナスタシア
+    &Battle::Anastasia,
 
     // Rare
     // イーサエモン・レッド
@@ -103,6 +105,8 @@ bool (Battle::*functionPointerTablePassive[])( Position p ) = {
     &Battle::Sun_Jian,
     // ルーベンス
     &Battle::Peter_Paul_Rubens,
+    // 真田幸村
+    &Battle::Sanada_Yukimura,
 
     //Epic
     // 張飛
@@ -159,6 +163,8 @@ bool (Battle::*functionPointerTablePassive[])( Position p ) = {
     &Battle::Gaius_Iulius_Caesar,
     // 土方歳三
     &Battle::Hijikata_Toshizo,
+    // ダーウィン
+    &Battle::Charles_Darwin,
 
     // Legendary
     // 織田信長
@@ -415,6 +421,15 @@ bool Battle::Montesquieu( Position p ) {
     }
     return is_use;
 }
+// アナスタシア
+bool Battle::Anastasia( Position p ) {
+    bool is_use = usePassiveHPLessThan( p, 50, 100 );
+    if ( is_use ) {
+        changeAttrSkill( p, AllEnemy, INT, INT, 20, DEBUFF );
+        changeAttrSkill( p, AllAlly, PHY, INT, 20, DEBUFF );
+    }
+    return is_use;
+} 
 
 // Rare
 // イーサエモン・レッド
@@ -625,6 +640,16 @@ bool Battle::Peter_Paul_Rubens( Position p ) {
             if ( !isDead( p_temp ) ) { changeAttrSkill( p_temp, OneSelf, AGI, AGI, 10, DEBUFF ); }
         }
         changeAttrSkill( p, OneSelf, AGI, AGI, 20, BUFF );
+    }
+    return is_use;
+}
+// 真田幸村
+bool Battle::Sanada_Yukimura( Position p ) {
+    bool is_use = usePassiveTeamHPLessThan( p, 80, 100 );
+    if ( is_use ) {
+        vector<Attr> va = { PHY, INT };
+        changeAttrSkill( p, FrontEnemy, va, PHY, 60, DEBUFF );
+        changeAttrSkill( p, OneSelf, AGI, AGI, 100, DEBUFF );
     }
     return is_use;
 }
@@ -863,6 +888,18 @@ bool Battle::Hijikata_Toshizo( Position p ) {
 	if ( is_use ) {
         changeAttrSkill( p, FrontEnemy, AGI, PHY, 10, DEBUFF );
         changeAttrSkill( p, HP, LOW, ALLY, PHY, PHY, 10, BUFF );
+    }
+    return is_use;
+}
+// ダーウィン
+bool Battle::Charles_Darwin( Position p ) {
+    bool is_use = usePassiveInActiveByChance( p, 50 );
+    if ( is_use ) {
+        Position p_target = searchFrontHero( oppositeSide(p.side) );
+        int buff = calcBuff( p_target, PHY );
+        changeAttrSkill( p, FrontEnemy, PHY, buff, 30, DEBUFF );
+        buff = calcBuff( p_target, AGI );
+        changeAttrSkill( p, FrontEnemy, AGI, buff, 30, DEBUFF );
     }
     return is_use;
 }

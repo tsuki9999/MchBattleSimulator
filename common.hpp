@@ -123,9 +123,9 @@ enum ActiveSkillType {
 // それぞれのレアリティのヒーロー数
 /* !!!!!!!!!!!!!!!!!!!!!!!!!!!!ヒーローが追加されたら変更すること!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
 const int n_novice = 8;
-const int n_uncommon = 15;
-const int n_rare = 24;
-const int n_epic = 27;
+const int n_uncommon = 16;
+const int n_rare = 25;
+const int n_epic = 28;
 const int n_legendary = 16;
 
 // この index に ID の下４ケタを足した値が、Passive Skill 関数の index

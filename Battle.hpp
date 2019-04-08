@@ -71,7 +71,10 @@ class Battle {
     int calcDebuff( Position p, Attr a );
     // ある Side のヒーローたちのある能力値が初期値より下がっている分の合計値を返す（下がっていなかったら０を返す）
     int calcDebuff( Side s, Attr a );
-
+    // p の位置にいるヒーローのある能力値が初期値より上がっている分の数値を返す（上がっていなかったら０を返す）
+    int calcBuff( Position p, Attr a );
+    // ある Side のヒーローたちのある能力値が初期値より上がっている分の合計値を返す（上がっていなかったら０を返す）
+    int calcBuff( Side s, Attr a );
 
     // アクティブスキルを使用
     void useActiveSkill( Position p );
@@ -787,6 +790,8 @@ class Battle {
     bool Tokugawa_Yoshinobu( Position p );
     // モンテスキュー
     bool Montesquieu( Position p );
+    // アナスタシア
+    bool Anastasia( Position p );
 
     // Rare
     // イーサエモン・レッド
@@ -837,6 +842,8 @@ class Battle {
     bool Sun_Jian( Position p );
     // ルーベンス
     bool Peter_Paul_Rubens( Position p );
+    // 真田幸村
+    bool Sanada_Yukimura( Position p );
 
     //Epic
     // 張飛
@@ -893,6 +900,8 @@ class Battle {
     bool Gaius_Iulius_Caesar( Position p );
     // 土方歳三
     bool Hijikata_Toshizo( Position p );
+    // ダーウィン
+    bool Charles_Darwin( Position p );
 
     // Legendary
     // 織田信長

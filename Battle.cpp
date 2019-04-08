@@ -1493,6 +1493,19 @@ int Battle::calcDebuff( Side s, Attr a ) {
     }
     return ret;
 }
+// p の位置にいるヒーローのある能力値が初期値より上がっている分の数値を返す（上がっていなかったら０を返す）
+int Battle::calcBuff( Position p, Attr a ) {
+    return max( ( heroes[p.side][p.order].attr_battle[a] - heroes[p.side][p.order].getInitAttr(a) ), 0 );
+}
+// ある Side のヒーローたちのある能力値が初期値より上がっている分の合計値を返す（上がっていなかったら０を返す）
+int Battle::calcBuff( Side s, Attr a ) {
+    int ret = 0;
+    for ( Order o = Front; o < Order_End; o++ ) {
+        ret += max( ( heroes[s][o].attr_battle[a] - heroes[s][o].getInitAttr(a) ), 0 );
+    }
+    return ret;
+}
+
 
 
 // p にいるヒーローの、バトル中のステータスを返す
