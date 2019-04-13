@@ -47,7 +47,9 @@ void Battle::startBattle() {
         if ( useSkills() ) { break; }
     }
 
-    ofs_battle_log << "Battle End" << endl;
+    if ( print_battle_log ) {
+        ofs_battle_log << "Battle End" << endl;
+    }
 
     if (!isEndGameByDead( Attack ) && isEndGameByDead( Defence ) ) { n_win++; }
     else { n_lose++; }
