@@ -64,6 +64,8 @@ string hero_name_array[ n_novice + n_uncommon + n_rare + n_epic + n_legendary + 
     "徳川慶喜",
     "モンテスキュー",
     "アナスタシア",
+    "ジェロニモ",
+    "茶々",
     // Rare      3xxxx
     "イーサエモン・レッド",
     "ダルタニャン",
@@ -90,6 +92,8 @@ string hero_name_array[ n_novice + n_uncommon + n_rare + n_epic + n_legendary + 
     "孫堅",
     "ルーベンス",
     "真田幸村",
+    "ロビンフッド",
+    "楊端和",
     // Epic    4xxxx
     "張飛",
     "ナイチンゲール",
@@ -119,6 +123,7 @@ string hero_name_array[ n_novice + n_uncommon + n_rare + n_epic + n_legendary + 
     "カエサル",
     "土方歳三",
     "ダーウィン",
+    "ヤマトタケル",
     // Legendary 5xxxx,
     "織田信長",
     "ナポレオン・ボナパルト",

@@ -215,7 +215,7 @@ void (Battle::*functionPointerTableActive[])( Position p ) = {
     &Battle::etheremon_malakele,    
     &Battle::etheremon_mapla,
     &Battle::etheremon_siberizen,
-    &Battle::eheremon_zedakazm,
+    &Battle::etheremon_zedakazm,
 
     // xxxx13    Yumi        ユミ
     // replica
@@ -952,8 +952,10 @@ void Battle::etheremon_mapla( Position p ) {
 void Battle::etheremon_siberizen( Position p ) {
     damageSkill( p, PHY, LOW, ENEMY, 50, 55, INT, ACTIVE_DAMAGE );
 }
-void Battle::eheremon_zedakazm( Position p ) {
-    // 要検証
+void Battle::etheremon_zedakazm( Position p ) {
+    statusAilmentSkill( p, AllEnemy, Poison );
+    statusAilmentSkill( p, AllEnemy, Confusion );
+    statusAilmentSkill( p, AllEnemy, Sleep );
 }
 
 // xxxx13    Yumi        ユミ

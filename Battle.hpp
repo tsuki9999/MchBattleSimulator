@@ -439,7 +439,7 @@ class Battle {
     void etheremon_malakele( Position p );    
     void etheremon_mapla( Position p );
     void etheremon_siberizen( Position p );
-    void eheremon_zedakazm( Position p );
+    void etheremon_zedakazm( Position p );
 
     // xxxx13    Yumi        ユミ
     // replica
@@ -802,6 +802,10 @@ class Battle {
     bool Montesquieu( Position p );
     // アナスタシア
     bool Anastasia( Position p );
+    // ジェロニモ
+    bool Geronimo( Position p );
+    // 茶々
+    bool Lady_Chacha( Position p );
 
     // Rare
     // イーサエモン・レッド
@@ -854,6 +858,10 @@ class Battle {
     bool Peter_Paul_Rubens( Position p );
     // 真田幸村
     bool Sanada_Yukimura( Position p );
+    // ロビンフッド
+    bool Robin_Hood( Position p );
+    // 楊端和
+    bool Yang_Duan_He( Position p );
 
     //Epic
     // 張飛
@@ -912,6 +920,8 @@ class Battle {
     bool Hijikata_Toshizo( Position p );
     // ダーウィン
     bool Charles_Darwin( Position p );
+    // ヤマトタケル
+    bool Yamato_Takeru( Position p );
 
     // Legendary
     // 織田信長
